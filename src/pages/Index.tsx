@@ -1,13 +1,7 @@
-import { MadeWithDyad } from "@/components/made-with-dyad";
-import LandingPage from "@/components/LandingPage"; // Import the new LandingPage component
+import LandingPage from "@/components/LandingPage";
 
 const Index = () => {
-  return (
-    <>
-      <LandingPage /> {/* Render the LandingPage component */}
-      <MadeWithDyad />
-    </>
-  );
+  return <LandingPage />;
 };
 
 export default Index;
