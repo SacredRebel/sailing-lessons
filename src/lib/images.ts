@@ -1,7 +1,7 @@
 // Optimized image management for cross-platform hosting
 // All images are optimized for Vercel, Git, and Lovable hosting
 
-// Generate optimized SVG data URLs
+// Generate optimized SVG data URLs with proper encoding
 const createOceanImage = (title: string, colors: string[] = ['#0ea5e9', '#0284c7', '#0369a1']) => {
   const svg = `<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -19,7 +19,10 @@ const createOceanImage = (title: string, colors: string[] = ['#0ea5e9', '#0284c7
     <text x="600" y="450" text-anchor="middle" fill="white" font-family="Arial" font-size="32" font-weight="bold">${title}</text>
     <text x="600" y="500" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Arial" font-size="18">Ocean Adventures</text>
   </svg>`;
-  return `data:image/svg+xml;base64,${btoa(svg)}`;
+  
+  // Use URL encoding instead of base64 for better compatibility
+  const encodedSvg = encodeURIComponent(svg);
+  return `data:image/svg+xml;charset=utf-8,${encodedSvg}`;
 };
 
 export const images = {
