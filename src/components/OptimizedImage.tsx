@@ -71,8 +71,8 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const getOptimizedSrc = () => {
     if (hasError) return placeholder || getDefaultPlaceholder();
     
-    // Check if it's a data URL (our generated images) - handle both base64 and URL encoded
-    if (src.startsWith('data:image/svg+xml;base64,') || src.startsWith('data:image/svg+xml;charset=utf-8,')) {
+    // For external image paths, return as-is
+    if (src.startsWith('/images/') || src.startsWith('http')) {
       return src;
     }
     
@@ -105,22 +105,6 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
     </svg>`;
     return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
   };
-
-  // Default placeholder with ocean theme
-  const defaultPlaceholderSvg = `<svg width="${width || 400}" height="${height || 300}" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="400" height="300" fill="url(#gradient)"/>
-    <defs>
-      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
-        <stop offset="50%" style="stop-color:#0284c7;stop-opacity:1" />
-        <stop offset="100%" style="stop-color:#0369a1;stop-opacity:1" />
-      </linearGradient>
-    </defs>
-    <circle cx="200" cy="150" r="40" fill="rgba(255,255,255,0.2)"/>
-    <path d="M0 200 Q100 180 200 200 T400 200 L400 300 L0 300 Z" fill="rgba(255,255,255,0.1)"/>
-    <text x="200" y="160" text-anchor="middle" fill="white" font-family="Arial" font-size="14">Ocean Adventure</text>
-  </svg>`;
-  const defaultPlaceholder = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(defaultPlaceholderSvg)}`;
 
   return (
     <div 
