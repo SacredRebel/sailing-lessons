@@ -1,6 +1,9 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
+import { Calendar as CalendarWidget } from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 import { 
   Phone, 
   Ship, 
@@ -300,7 +303,7 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
 
 function Journey() {
   // Calendar state and events
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = React.useState(new Date());
   const events = {
     "2025-09-12": [
       { title: "Sailing Lesson (Morning)", time: "9:00 AM – 12:00 PM" },
@@ -448,7 +451,7 @@ function Journey() {
       <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
         {/* Calendar */}
         <div className="bg-white rounded-2xl shadow-lg p-6">
-          <Calendar
+          <CalendarWidget
             onChange={setDate}
             value={date}
             className="w-full"
