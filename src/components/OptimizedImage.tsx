@@ -65,6 +65,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const handleError = () => {
     setHasError(true);
     onError?.();
+    console.error(`Failed to load image: ${src}`);
   };
 
   // Generate optimized src for different platforms
@@ -122,7 +123,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
         </div>
       )}
 
-      {/* Error state */}
+      {/* Error state - only show if there's actually an error */}
       {hasError && (
         <div className="absolute inset-0 bg-gradient-to-br from-sky-200 to-blue-300 flex items-center justify-center">
           <div className="text-center text-sky-600">
@@ -132,6 +133,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
               </svg>
             </div>
             <p className="text-sm">Image unavailable</p>
+            <p className="text-xs text-sky-500 mt-1">Check console for details</p>
           </div>
         </div>
       )}
