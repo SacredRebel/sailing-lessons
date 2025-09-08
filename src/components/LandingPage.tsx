@@ -80,7 +80,7 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
   };
 
   return (
-    <header className="w-full sticky top-0 z-[200] backdrop-blur bg-gradient-to-r from-sky-300 via-blue-300 to-cyan-300 border-b border-sky-300/70">
+    <header className="w-full sticky top-0 z-[999] backdrop-blur bg-gradient-to-r from-sky-300 via-blue-300 to-cyan-300 border-b border-sky-300/70">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
         {/* Logo: desktop and mobile */}
         <a href="#top" className="flex items-center gap-3 font-semibold hover:scale-105 transition-transform md:static fixed top-2 left-4 z-50">
@@ -107,7 +107,7 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
         </a>
         {/* Mobile: sticky menu icon only */}
         <button
-          className="md:hidden fixed top-2 right-4 h-9 w-9 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-md border border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200 z-[300]"
+          className="md:hidden fixed top-2 right-4 h-9 w-9 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-md border border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200 z-[1000]"
           style={{ boxShadow: '0 2px 8px rgba(0, 180, 255, 0.10)' }}
           onClick={() => mobileMenuOpen ? closeMenu() : openMenu()}
           aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -139,7 +139,7 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
         {/* Mobile menu popup */}
         {mobileMenuOpen && (
           <div
-            className="fixed inset-0 z-[200] bg-gradient-to-br from-sky-100/80 via-white/90 to-blue-100/80 backdrop-blur-sm flex items-start justify-end"
+            className="fixed inset-0 z-[9999] bg-gradient-to-br from-sky-100/80 via-white/90 to-blue-100/80 backdrop-blur-sm flex items-start justify-end"
             onClick={handleMenuBgClick}
             role="presentation"
             style={{ cursor: 'pointer' }}
@@ -968,7 +968,7 @@ function GalleryPlaceholder() {
               tabIndex={0}
             >
               &times;
-            </button>
+            </button> 
             {/* Left arrow always present, larger and touch-friendly on mobile */}
             <button
               className="absolute left-2 top-1/2 -translate-y-1/2 text-white text-4xl font-bold bg-black/50 rounded-full p-3 hover:bg-black/70 transition z-10 md:text-3xl md:p-2 md:left-4"
