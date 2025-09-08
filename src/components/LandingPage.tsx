@@ -67,14 +67,17 @@ const LandingPage = () => {
 
 function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: string) => string }) {
   return (
-    <header className="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-slate-200/60">
+    <header className="sticky top-0 z-40 backdrop-blur bg-white/90 border-b border-slate-200/60">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <a href="#top" className="flex items-center gap-3 font-semibold hover:scale-105 transition-transform">
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-sky-600 text-white shadow-sm">
             <Ship className="h-5 w-5" />
           </span>
-          <span className="text-slate-900">Sail Long Beach</span>
+          <span className="text-slate-900 hidden sm:block">Sail Long Beach</span>
+          <span className="text-slate-900 sm:hidden">SLB</span>
         </a>
+        
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6 text-sm text-slate-600">
           <a href="#offerings" className="hover:text-slate-900 transition-colors">Offerings</a>
           <a href="#journey" className="hover:text-slate-900 transition-colors">The Journey</a>
@@ -82,9 +85,18 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
           <a href="#faq" className="hover:text-slate-900 transition-colors">FAQ</a>
           <a href="#booking" className="hover:text-slate-900 transition-colors">Book</a>
         </nav>
+        
+        {/* Mobile Menu Button */}
+        <button className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors">
+          <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        
+        {/* Desktop Call Button */}
         <a 
           href={`tel:${phone}`} 
-          className="inline-flex items-center gap-2 rounded-xl bg-sky-600 px-4 py-2 text-white shadow-sm hover:bg-sky-700 transition-colors hover:scale-105"
+          className="hidden md:inline-flex items-center gap-2 rounded-xl bg-sky-600 px-4 py-2 text-white shadow-sm hover:bg-sky-700 transition-colors hover:scale-105"
         >
           <Phone className="h-4 w-4" /> {formatPhone(phone)}
         </a>
@@ -163,20 +175,45 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
             </div>
           </div>
 
-          {/* Hero Slideshow */}
-          <div className="relative">
+          {/* Hero Slideshow - Desktop only */}
+          <div className="relative hidden lg:block">
             <HeroSlideshow />
+          </div>
+        </div>
+
+        {/* Mobile Hero Background Image */}
+        <div className="lg:hidden absolute inset-0 -z-10">
+          <OptimizedImage
+            src={images.hero.sailing.src}
+            alt={images.hero.sailing.alt}
+            className="w-full h-full object-cover"
+            priority={true}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        </div>
+
+        {/* Mobile Hero Content Overlay */}
+        <div className="lg:hidden relative z-10 text-white text-center pt-20 pb-32">
+          <div className="space-y-6">
+            <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight">
+              Sailing Lessons, Catalina Trips, 
+              <span className="block text-sky-300">
+                Whale Watching & More
+              </span>
+            </h1>
             
-            {/* Floating action buttons */}
-            <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 flex gap-3">
-              <Button size="sm" className="rounded-full bg-white shadow-lg hover:shadow-xl">
-                <Camera className="h-4 w-4" />
+            <p className="text-lg text-white/90 max-w-md mx-auto leading-relaxed">
+              Learn the ropes, set a course to Catalina, glide on paddle boards, or meet migrating giants.
+            </p>
+            
+            <div className="flex flex-col items-center gap-4 pt-4">
+              <Button size="lg" className="ripple-effect bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 text-white px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95">
+                <Sparkles className="h-5 w-5 mr-2" />
+                Book your spot
               </Button>
-              <Button size="sm" className="rounded-full bg-white shadow-lg hover:shadow-xl">
-                <Volume2 className="h-4 w-4" />
-              </Button>
-              <Button size="sm" className="rounded-full bg-white shadow-lg hover:shadow-xl">
-                <Eye className="h-4 w-4" />
+              <Button size="lg" variant="outline" className="ripple-effect border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-2xl hover:scale-105 active:scale-95 transition-all duration-300">
+                <Play className="h-5 w-5 mr-2" />
+                Watch Video
               </Button>
             </div>
           </div>
@@ -1043,33 +1080,34 @@ function Footer({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
 
 function CallNowFloating({ phone, formatPhone }: { phone: string; formatPhone: (phone: string) => string }) {
   return (
-    <div className="fixed bottom-6 right-6 z-50 md:hidden">
-      <a
-        href={`tel:${phone}`}
-        className="ripple-effect inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-600 to-blue-600 px-6 py-4 text-white font-semibold shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 active:scale-95"
-      >
-        <div className="relative">
-          <Phone className="h-5 w-5" />
-          <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse" />
-        </div>
-        <span className="text-sm">Call Now</span>
-      </a>
-      
-      {/* Floating action menu for additional options */}
-      <div className="mt-3 space-y-2">
+    <div className="fixed bottom-6 left-6 z-50 md:hidden">
+      {/* 3 Round Icons Stacked Vertically */}
+      <div className="flex flex-col gap-3">
+        {/* Call Icon */}
+        <a
+          href={`tel:${phone}`}
+          className="ripple-effect inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-sky-600 to-blue-600 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 active:scale-95"
+        >
+          <div className="relative">
+            <Phone className="h-6 w-6" />
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse" />
+          </div>
+        </a>
+        
+        {/* Book Icon */}
         <a
           href="#booking"
-          className="ripple-effect inline-flex items-center gap-2 rounded-full bg-white px-4 py-3 text-sky-600 font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95"
+          className="ripple-effect inline-flex items-center justify-center w-14 h-14 rounded-full bg-white text-sky-600 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 border-2 border-sky-200"
         >
-          <Calendar className="h-4 w-4" />
-          <span className="text-xs">Book</span>
+          <Calendar className="h-6 w-6" />
         </a>
+        
+        {/* Tours Icon */}
         <a
           href="#offerings"
-          className="ripple-effect inline-flex items-center gap-2 rounded-full bg-white px-4 py-3 text-sky-600 font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95"
+          className="ripple-effect inline-flex items-center justify-center w-14 h-14 rounded-full bg-white text-sky-600 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 border-2 border-sky-200"
         >
-          <Sparkles className="h-4 w-4" />
-          <span className="text-xs">Tours</span>
+          <Sparkles className="h-6 w-6" />
         </a>
       </div>
     </div>
