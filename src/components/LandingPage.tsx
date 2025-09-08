@@ -90,7 +90,7 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
     if (e.target === e.currentTarget) closeMenu();
   };
   return (
-  <header className="sticky top-0 z-50 backdrop-blur bg-gradient-to-r from-sky-300 via-blue-300 to-cyan-300 border-b border-sky-300/70">
+  <header className="fixed top-0 left-0 w-full z-50 backdrop-blur bg-gradient-to-r from-sky-300 via-blue-300 to-cyan-300 border-b border-sky-300/70">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
         {/* Logo: desktop and mobile */}
         <a href="#top" className="flex items-center gap-3 font-semibold hover:scale-105 transition-transform md:static fixed top-2 left-4 z-50">
@@ -111,7 +111,7 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
       </div>
       {/* Mobile: sticky nav icon outside flex container */}
       <button
-        className="md:hidden fixed top-2 right-4 h-9 w-9 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-md border border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200 z-50"
+  className="md:hidden fixed top-2 right-4 h-9 w-9 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-md border border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200 z-[60]"
         style={{ boxShadow: '0 2px 8px rgba(0, 180, 255, 0.10)' }}
         onClick={openMenu}
         aria-label="Open navigation menu"
@@ -240,7 +240,7 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
         </div>
         {/* Mobile: slideshow under title, no duplicate content */}
         <div className="lg:hidden space-y-4 text-center">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight mt-0 pt-0" style={{marginTop: '-0.75rem'}}>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight mt-0 pt-0" style={{marginTop: '-2.5rem'}}>
             Sailing Lessons, Catalina Trips,
             <span className="block bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
               Whale Watching & More
