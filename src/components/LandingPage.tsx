@@ -80,7 +80,7 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
   };
 
   return (
-    <header className="w-full z-50 backdrop-blur bg-gradient-to-r from-sky-300 via-blue-300 to-cyan-300 border-b border-sky-300/70">
+    <header className="w-full z-50 sticky top-0 backdrop-blur bg-gradient-to-r from-sky-300 via-blue-300 to-cyan-300 border-b border-sky-300/70">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
         {/* Logo: desktop and mobile */}
         <a href="#top" className="flex items-center gap-3 font-semibold hover:scale-105 transition-transform md:static fixed top-2 left-4 z-50">
@@ -107,8 +107,8 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
         </a>
         {/* Mobile: sticky menu icon only */}
         <button
-          className="md:hidden fixed top-2 right-4 h-9 w-9 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-md border border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200 z-[100]"
-          style={{ boxShadow: '0 2px 8px rgba(0, 180, 255, 0.10)', position: 'sticky' }}
+          className="md:hidden sticky top-2 right-4 h-9 w-9 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-md border border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200 z-[100]"
+          style={{ boxShadow: '0 2px 8px rgba(0, 180, 255, 0.10)', position: 'sticky', float: 'right' }}
           onClick={() => mobileMenuOpen ? closeMenu() : openMenu()}
           aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
         >
@@ -139,13 +139,14 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
         {/* Mobile menu popup */}
         {mobileMenuOpen && (
           <div
-            className="fixed inset-0 z-[200] bg-gradient-to-br from-sky-100/80 via-white/90 to-blue-100/80 backdrop-blur-sm flex items-start justify-end"
+            className="fixed inset-0 z-[200] bg-gradient-to-br from-sky-100/80 via-white/90 to-blue-100/80 backdrop-blur-sm flex items-start justify-end animate-fade-in"
             onClick={handleMenuBgClick}
             role="presentation"
+            style={{ transition: 'opacity 0.3s, transform 0.3s', opacity: mobileMenuOpen ? 1 : 0, transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(-20px)' }}
           >
-            <div
-              className="bg-white rounded-2xl shadow-xl mt-4 mr-4 p-4 w-64 flex flex-col gap-4 animate-fade-in border border-sky-200"
-              style={{ boxShadow: '0 4px 16px rgba(0, 180, 255, 0.10)' }}
+            <nav
+              className="bg-white rounded-2xl shadow-xl mt-4 mr-4 p-4 w-64 flex flex-col gap-4 border border-sky-200 animate-slide-in"
+              style={{ boxShadow: '0 4px 16px rgba(0, 180, 255, 0.10)', transition: 'opacity 0.3s, transform 0.3s', opacity: mobileMenuOpen ? 1 : 0, transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(-20px)' }}
             >
               <button className="self-end text-2xl text-sky-600 hover:text-sky-800 transition-colors" onClick={closeMenu} aria-label="Close menu">&times;</button>
               <a href="#offerings" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>Offerings</a>
@@ -154,7 +155,7 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
               <a href="#faq" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>FAQ</a>
               <a href="#booking" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>Book</a>
               <a href="#location" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>Location</a>
-            </div>
+            </nav>
           </div>
         )}
       </div>
@@ -178,9 +179,9 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-blue-400/20 to-transparent rounded-t-full" />
         <div className="absolute bottom-0 right-0 w-full h-24 bg-gradient-to-t from-cyan-400/15 to-transparent rounded-t-full" style={{ transform: 'translateX(20px)' }} />
       </div>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 w-full mt-16 lg:mt-0">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 w-full mt-2 lg:mt-0">
         {/* Desktop: hero content and slideshow side-by-side */}
-        <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center">
+        <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center relative">
           <div className="space-y-8">
             {/* Enhanced tag with rounded design */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-sky-100 to-blue-100 border border-sky-200">
@@ -208,15 +209,25 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
                 Watch Video
               </Button>
             </div>
-            {/* Trust indicators */}
-            <div className="flex flex-wrap items-center gap-6 pt-4">
-              <div className="flex items-center gap-2 text-sm text-slate-600">
-                <Shield className="h-4 w-4 text-green-500" />
-                <span>Licensed & Insured</span>
+            {/* Trust indicators and scroll at bottom for desktop */}
+            <div className="absolute left-0 right-0 bottom-8 flex flex-col items-center gap-4">
+              <div className="flex flex-row items-center justify-center gap-8">
+                <div className="flex items-center gap-2 text-base text-slate-600">
+                  <Shield className="h-5 w-5 text-green-500" />
+                  <span>Licensed & Insured</span>
+                </div>
+                <div className="flex items-center gap-2 text-base text-slate-600">
+                  <Star className="h-5 w-5 text-yellow-500" />
+                  <span>5.0 Rating</span>
+                </div>
+                <div className="flex items-center gap-2 text-base text-slate-600">
+                  <MapPin className="h-5 w-5 text-sky-500 animate-pulse" />
+                  <span>Local Expertise</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2 text-sm text-slate-600">
-                <Star className="h-4 w-4 text-yellow-500" />
-                <span>5.0 Rating</span>
+              <div className="mt-2 flex flex-col items-center">
+                <span className="text-sm text-sky-600 font-semibold">Scroll to explore</span>
+                <ChevronDown className="h-8 w-8 text-sky-600 animate-bounce" />
               </div>
             </div>
           </div>
@@ -227,7 +238,7 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
           </div>
         </div>
         {/* Mobile: restructured hero content */}
-        <div className="lg:hidden flex flex-col items-center gap-8">
+        <div className="lg:hidden flex flex-col items-center gap-8 relative">
           {/* Title */}
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight text-center">
             Sailing Lessons, Catalina Trips,
@@ -261,20 +272,25 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
               Watch Video
             </Button>
           </div>
-          {/* Trust indicators */}
-          <div className="flex flex-col items-center gap-4 pt-4 w-full">
-            <div className="flex items-center gap-2 text-sm text-slate-600">
-              <Shield className="h-4 w-4 text-green-500" />
-              <span>Licensed & Insured</span>
+          {/* Trust indicators and scroll at bottom for mobile */}
+          <div className="absolute left-0 right-0 bottom-8 flex flex-col items-center gap-4">
+            <div className="flex flex-row items-center justify-center gap-6">
+              <div className="flex items-center gap-2 text-sm text-slate-600">
+                <Shield className="h-4 w-4 text-green-500" />
+                <span>Licensed & Insured</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-slate-600">
+                <Star className="h-4 w-4 text-yellow-500" />
+                <span>5.0 Rating</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-slate-600">
+                <MapPin className="h-4 w-4 text-sky-500 animate-pulse" />
+                <span>Local Expertise</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2 text-sm text-slate-600">
-              <Star className="h-4 w-4 text-yellow-500" />
-              <span>5.0 Rating</span>
-            </div>
-            {/* Scroll to explore with animated icon (mobile only) */}
-            <div className="flex flex-col items-center gap-1 mt-2 animate-bounce">
+            <div className="mt-2 flex flex-col items-center">
               <span className="text-sm text-sky-600 font-semibold">Scroll to explore</span>
-              <ChevronDown className="h-6 w-6 text-sky-600" />
+              <ChevronDown className="h-6 w-6 text-sky-600 animate-bounce" />
             </div>
           </div>
         </div>
