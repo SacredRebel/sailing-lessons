@@ -90,14 +90,15 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
     if (e.target === e.currentTarget) closeMenu();
   };
   return (
-    <header className="sticky top-0 z-50 backdrop-blur bg-white/90 border-b border-sky-200/60">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Desktop: logo and nav */}
-        <a href="#top" className="hidden md:flex items-center gap-3 font-semibold hover:scale-105 transition-transform">
+  <header className="sticky top-0 z-50 backdrop-blur bg-gradient-to-r from-sky-100 via-blue-100 to-cyan-100 border-b border-sky-200/60">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+        {/* Logo: desktop and mobile */}
+        <a href="#top" className="flex items-center gap-3 font-semibold hover:scale-105 transition-transform md:static fixed top-2 left-4 z-50">
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-sky-600 text-white shadow-sm">
             <Ship className="h-5 w-5" />
           </span>
-          <span className="text-slate-900">Sail Long Beach</span>
+          <span className="text-slate-900 hidden md:block">Sail Long Beach</span>
+          <span className="text-slate-900 md:hidden font-bold text-base">SLB</span>
         </a>
         <nav className="hidden md:flex items-center gap-6 text-sm text-slate-600">
           <a href="#offerings" className="hover:text-sky-600 font-semibold transition-colors">Offerings</a>
@@ -109,13 +110,13 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
         </nav>
         {/* Mobile: only nav icon, styled */}
         <button
-          className="md:hidden ml-auto h-12 w-12 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-lg border-2 border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200"
-          style={{ boxShadow: '0 4px 16px rgba(0, 180, 255, 0.10)' }}
+          className="md:hidden fixed top-2 right-4 h-9 w-9 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-md border border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200"
+          style={{ boxShadow: '0 2px 8px rgba(0, 180, 255, 0.10)' }}
           onClick={openMenu}
           aria-label="Open navigation menu"
         >
           {/* Water-themed nav icon */}
-          <svg className="h-7 w-7" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg className="h-5 w-5" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="6" y="9" width="20" height="2.5" rx="1.25" fill="url(#blue1)" />
             <rect x="6" y="15" width="20" height="2.5" rx="1.25" fill="url(#blue2)" />
             <rect x="6" y="21" width="20" height="2.5" rx="1.25" fill="url(#blue3)" />
@@ -238,7 +239,7 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
         </div>
         {/* Mobile: slideshow under title, no duplicate content */}
         <div className="lg:hidden space-y-4 text-center">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight mt-0 pt-0">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight mt-0 pt-0" style={{marginTop: 0}}>
             Sailing Lessons, Catalina Trips,
             <span className="block bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
               Whale Watching & More
