@@ -122,33 +122,78 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
         <div className="absolute bottom-0 right-0 w-full h-24 bg-gradient-to-t from-cyan-400/15 to-transparent rounded-t-full" style={{ transform: 'translateX(20px)' }} />
       </div>
 
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-20 w-full">
-        <div className="space-y-8 text-center">
-          {/* Enhanced tag with rounded design */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 w-full">
+        {/* Desktop: hero content and slideshow side-by-side */}
+        <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-8">
+            {/* Enhanced tag with rounded design */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-sky-100 to-blue-100 border border-sky-200">
+              <Droplets className="h-4 w-4 text-sky-600" />
+              <p className="text-sm font-medium text-sky-700">
+                Long Beach • Private & Small‑Group
+              </p>
+            </div>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
+              Sailing Lessons, Catalina Trips,
+              <span className="block bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
+                Whale Watching & More
+              </span>
+            </h1>
+            <p className="text-lg lg:text-xl text-slate-600 max-w-prose leading-relaxed">
+              Learn the ropes, set a course to Catalina, glide on paddle boards, or meet migrating giants. Crafted experiences from the Long Beach waterfront—designed for learning, adventure, and pure ocean joy.
+            </p>
+            <div className="flex flex-col sm:flex-row items-start gap-4">
+              <Button size="lg" className="ripple-effect bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 text-white px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95">
+                <Sparkles className="h-5 w-5 mr-2" />
+                Book your spot
+              </Button>
+              <Button size="lg" variant="outline" className="ripple-effect border-2 border-sky-600 text-sky-600 hover:bg-sky-50 px-8 py-4 rounded-2xl hover:scale-105 active:scale-95 transition-all duration-300">
+                <Play className="h-5 w-5 mr-2" />
+                Watch Video
+              </Button>
+            </div>
+            {/* Trust indicators */}
+            <div className="flex flex-wrap items-center gap-6 pt-4">
+              <div className="flex items-center gap-2 text-sm text-slate-600">
+                <Shield className="h-4 w-4 text-green-500" />
+                <span>Licensed & Insured</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-slate-600">
+                <Star className="h-4 w-4 text-yellow-500" />
+                <span>5.0 Rating</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-slate-600">
+                <Users className="h-4 w-4 text-blue-500" />
+                <span>500+ Happy Sailors</span>
+              </div>
+            </div>
+          </div>
+          {/* Slideshow for desktop */}
+          <div className="relative">
+            <HeroSlideshow />
+          </div>
+        </div>
+        {/* Mobile: slideshow under title, no duplicate content */}
+        <div className="lg:hidden space-y-8 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-sky-100 to-blue-100 border border-sky-200 justify-center">
             <Droplets className="h-4 w-4 text-sky-600" />
             <p className="text-sm font-medium text-sky-700">
               Long Beach • Private & Small‑Group
             </p>
           </div>
-
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
             Sailing Lessons, Catalina Trips,
             <span className="block bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
               Whale Watching & More
             </span>
           </h1>
-
-          <p className="text-lg lg:text-xl text-slate-600 max-w-prose mx-auto leading-relaxed">
-            Learn the ropes, set a course to Catalina, glide on paddle boards, or meet migrating giants. Crafted experiences from the Long Beach waterfront—designed for learning, adventure, and pure ocean joy.
-          </p>
-
-          {/* Slideshow under the title for all devices */}
           <div className="w-full max-w-2xl mx-auto">
             <HeroSlideshow />
           </div>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <p className="text-lg text-slate-600 max-w-md mx-auto leading-relaxed">
+            Learn the ropes, set a course to Catalina, glide on paddle boards, or meet migrating giants. Crafted experiences from the Long Beach waterfront—designed for learning, adventure, and pure ocean joy.
+          </p>
+          <div className="flex flex-col items-center gap-4 pt-4">
             <Button size="lg" className="ripple-effect bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 text-white px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95">
               <Sparkles className="h-5 w-5 mr-2" />
               Book your spot
@@ -158,7 +203,6 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
               Watch Video
             </Button>
           </div>
-
           {/* Trust indicators */}
           <div className="flex flex-wrap items-center justify-center gap-6 pt-4">
             <div className="flex items-center gap-2 text-sm text-slate-600">
@@ -175,7 +219,6 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
             </div>
           </div>
         </div>
-
         {/* Enhanced scroll indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2">
           <span className="text-sm text-slate-500 font-medium">Scroll to explore</span>
@@ -438,21 +481,20 @@ function Offerings({ phone, formatPhone }: { phone: string; formatPhone: (phone:
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {offerings.map((offering, index) => (
-            <div key={offering.title} className="group relative">
+            <div key={offering.title} className="group relative w-full max-w-xs mx-auto">
               {/* Popular badge */}
               {offering.popular && (
                 <div className="absolute -top-3 -right-3 z-10 bg-gradient-to-r from-yellow-400 to-orange-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                   Popular
                 </div>
               )}
-              
               <Card className={`h-full group-hover:shadow-2xl transition-all duration-500 bg-gradient-to-br ${offering.bgColor} border-2 ${offering.borderColor} rounded-3xl overflow-hidden relative`}>
-                {/* Header with image and gradient overlay - 10% bigger */}
+                {/* Header with image and gradient overlay - 20% brighter */}
                 <div className="h-44 relative overflow-hidden">
                   <OptimizedImage
                     src={getOfferingImage(offering.title)}
                     alt={offering.title}
-                    className="w-full h-full"
+                    className="w-full h-full" style={{ filter: 'brightness(1.2)' }}
                     width={400}
                     height={176}
                     quality={80}
@@ -467,7 +509,6 @@ function Offerings({ phone, formatPhone }: { phone: string; formatPhone: (phone:
                   <div className="absolute top-4 right-4 w-16 h-16 bg-white/10 rounded-full blur-sm" />
                   <div className="absolute bottom-4 left-4 w-12 h-12 bg-white/5 rounded-full blur-sm" />
                 </div>
-                
                 <CardContent className="p-8">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-2xl font-bold text-slate-900">{offering.title}</h3>
@@ -476,9 +517,7 @@ function Offerings({ phone, formatPhone }: { phone: string; formatPhone: (phone:
                       <span>{offering.duration}</span>
                     </div>
                   </div>
-                  
                   <p className="text-slate-600 mb-6 leading-relaxed text-lg">{offering.description}</p>
-                  
                   {/* Features with enhanced design */}
                   <div className="space-y-3 mb-6">
                     {offering.features.map((feature, idx) => (
@@ -488,7 +527,6 @@ function Offerings({ phone, formatPhone }: { phone: string; formatPhone: (phone:
                       </div>
                     ))}
                   </div>
-                  
                   {/* Difficulty and price */}
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-2">
@@ -498,9 +536,14 @@ function Offerings({ phone, formatPhone }: { phone: string; formatPhone: (phone:
                       }`} />
                       <span className="text-sm text-slate-600">{offering.difficulty}</span>
                     </div>
-                    <div className="text-2xl font-bold text-slate-900">{offering.price}</div>
+                    {/* Desktop: improved price design */}
+                    <div className="hidden lg:flex flex-col items-end">
+                      <span className="text-base text-slate-500 font-medium">Price</span>
+                      <span className="text-xl font-bold text-sky-700 bg-white/80 px-3 py-1 rounded-xl shadow">{offering.price}</span>
+                    </div>
+                    {/* Mobile: simple price */}
+                    <div className="lg:hidden text-lg font-bold text-sky-700 bg-white/80 px-2 py-1 rounded-xl shadow">{offering.price}</div>
                   </div>
-                  
                   <Button className="ripple-effect w-full bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 text-white py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95">
                     <Sparkles className="h-4 w-4 mr-2" />
                     Book This Adventure
@@ -830,22 +873,24 @@ function GalleryPlaceholder() {
 
         {/* Modal for image preview and swipe */}
         {modalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={closeModal} role="presentation">
             <button
               className="absolute top-8 right-8 text-white text-3xl font-bold bg-black/40 rounded-full p-2 hover:bg-black/70 transition"
               onClick={closeModal}
               aria-label="Close preview"
+              tabIndex={0}
             >
               &times;
             </button>
             <button
               className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-3xl font-bold bg-black/40 rounded-full p-2 hover:bg-black/70 transition"
-              onClick={showPrev}
+              onClick={e => { e.stopPropagation(); showPrev(); }}
               aria-label="Previous image"
+              tabIndex={0}
             >
               &#8592;
             </button>
-            <div className="max-w-full max-h-full flex flex-col items-center justify-center">
+            <div className="max-w-full max-h-full flex flex-col items-center justify-center" onClick={e => e.stopPropagation()}>
               <OptimizedImage
                 src={galleryImages[currentIndex].src}
                 alt={galleryImages[currentIndex].alt}
@@ -864,8 +909,9 @@ function GalleryPlaceholder() {
             </div>
             <button
               className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-3xl font-bold bg-black/40 rounded-full p-2 hover:bg-black/70 transition"
-              onClick={showNext}
+              onClick={e => { e.stopPropagation(); showNext(); }}
               aria-label="Next image"
+              tabIndex={0}
             >
               &#8594;
             </button>
