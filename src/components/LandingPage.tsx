@@ -107,7 +107,7 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
         </a>
         {/* Mobile: sticky menu icon only */}
         <button
-          className="md:hidden fixed top-2 right-4 h-9 w-9 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-md border border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200 z-[100]"
+          className="md:hidden fixed top-2 right-4 h-9 w-9 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-md border border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200 z-[300]"
           style={{ boxShadow: '0 2px 8px rgba(0, 180, 255, 0.10)' }}
           onClick={() => mobileMenuOpen ? closeMenu() : openMenu()}
           aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -139,14 +139,15 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
         {/* Mobile menu popup */}
         {mobileMenuOpen && (
           <div
-            className="fixed inset-0 z-[200] bg-gradient-to-br from-sky-100/80 via-white/90 to-blue-100/80 backdrop-blur-sm flex items-start justify-end animate-fade-in"
+            className="fixed inset-0 z-[200] bg-gradient-to-br from-sky-100/80 via-white/90 to-blue-100/80 backdrop-blur-sm flex items-start justify-end"
             onClick={handleMenuBgClick}
             role="presentation"
-            style={{ transition: 'opacity 0.3s, transform 0.3s', opacity: mobileMenuOpen ? 1 : 0, transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(-20px)' }}
+            style={{ cursor: 'pointer' }}
           >
             <nav
-              className="bg-white rounded-2xl shadow-xl mt-4 mr-4 p-4 w-64 flex flex-col gap-4 border border-sky-200 animate-slide-in"
-              style={{ boxShadow: '0 4px 16px rgba(0, 180, 255, 0.10)', transition: 'opacity 0.3s, transform 0.3s', opacity: mobileMenuOpen ? 1 : 0, transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(-20px)' }}
+              className="bg-white rounded-2xl shadow-xl mt-4 mr-4 p-4 w-64 flex flex-col gap-4 border border-sky-200"
+              style={{ boxShadow: '0 4px 16px rgba(0, 180, 255, 0.10)', cursor: 'default' }}
+              onClick={e => e.stopPropagation()}
             >
               <button className="self-end text-2xl text-sky-600 hover:text-sky-800 transition-colors" onClick={closeMenu} aria-label="Close menu">&times;</button>
               <a href="#offerings" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>Offerings</a>
@@ -960,7 +961,8 @@ function GalleryPlaceholder() {
             onTouchEnd={handleTouchEnd}
           >
             <button
-              className="absolute top-8 right-8 text-white text-3xl font-bold bg-black/40 rounded-full p-2 hover:bg-black/70 transition"
+              className="absolute top-4 right-4 text-white text-4xl font-bold bg-black/60 rounded-full p-4 hover:bg-black/80 transition z-[60]"
+              style={{ opacity: 1, pointerEvents: 'auto', touchAction: 'manipulation' }}
               onClick={closeModal}
               aria-label="Close preview"
               tabIndex={0}
