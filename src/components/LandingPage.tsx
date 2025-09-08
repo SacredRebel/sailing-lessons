@@ -73,41 +73,38 @@ const LandingPage = () => {
 
 function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: string) => string }) {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
-  const [menuAnimating, setMenuAnimating] = React.useState(false);
+  const openMenu = () => setMobileMenuOpen(true);
+  const closeMenu = () => setMobileMenuOpen(false);
+  const handleMenuBgClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) closeMenu();
+  };
 
-  // Open menu instantly
-  const openMenu = () => {
-    setMobileMenuOpen(true);
-    return (
-      <div>
-        {/* Desktop header: normal, mobile header: not sticky */}
-        <header className="w-full z-50 backdrop-blur bg-gradient-to-r from-sky-300 via-blue-300 to-cyan-300 border-b border-sky-300/70">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
-            {/* Logo: desktop and mobile */}
-            <a href="#top" className="flex items-center gap-3 font-semibold hover:scale-105 transition-transform md:static fixed top-2 left-4 z-50">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-sky-600 text-white shadow-sm">
-                <Ship className="h-5 w-5" />
-              </span>
-              <span className="text-slate-900 hidden md:block">Sail Long Beach</span>
-              <span className="text-slate-900 md:hidden font-bold text-base">SLB</span>
-            </a>
-            <nav className="hidden md:flex items-center gap-6 text-sm text-slate-600">
-              <a href="#offerings" className="hover:text-sky-600 font-semibold transition-colors">Offerings</a>
-              <a href="#journey" className="hover:text-sky-600 font-semibold transition-colors">The Journey</a>
-              <a href="#boat" className="hover:text-sky-600 font-semibold transition-colors">The Boat</a>
-              <a href="#faq" className="hover:text-sky-600 font-semibold transition-colors">FAQ</a>
-              <a href="#booking" className="hover:text-sky-600 font-semibold transition-colors">Book</a>
-              <a href="#location" className="hover:text-sky-600 font-semibold transition-colors">Location</a>
-            </nav>
-            {/* Desktop Call Button: now inside flex row */}
-            <a 
-              href={`tel:${phone}`} 
-              className="hidden md:inline-flex items-center gap-2 rounded-xl bg-sky-600 px-4 py-2 text-white shadow-sm hover:bg-sky-700 transition-colors hover:scale-105"
-            >
-              <Phone className="h-4 w-4" /> {formatPhone(phone)}
-            </a>
-          </div>
-        </header>
+  return (
+    <header className="w-full z-50 backdrop-blur bg-gradient-to-r from-sky-300 via-blue-300 to-cyan-300 border-b border-sky-300/70">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+        {/* Logo: desktop and mobile */}
+        <a href="#top" className="flex items-center gap-3 font-semibold hover:scale-105 transition-transform md:static fixed top-2 left-4 z-50">
+          <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-sky-600 text-white shadow-sm">
+            <Ship className="h-5 w-5" />
+          </span>
+          <span className="text-slate-900 hidden md:block">Sail Long Beach</span>
+          <span className="text-slate-900 md:hidden font-bold text-base">SLB</span>
+        </a>
+        <nav className="hidden md:flex items-center gap-6 text-sm text-slate-600">
+          <a href="#offerings" className="hover:text-sky-600 font-semibold transition-colors">Offerings</a>
+          <a href="#journey" className="hover:text-sky-600 font-semibold transition-colors">The Journey</a>
+          <a href="#boat" className="hover:text-sky-600 font-semibold transition-colors">The Boat</a>
+          <a href="#faq" className="hover:text-sky-600 font-semibold transition-colors">FAQ</a>
+          <a href="#booking" className="hover:text-sky-600 font-semibold transition-colors">Book</a>
+          <a href="#location" className="hover:text-sky-600 font-semibold transition-colors">Location</a>
+        </nav>
+        {/* Desktop Call Button: now inside flex row */}
+        <a 
+          href={`tel:${phone}`} 
+          className="hidden md:inline-flex items-center gap-2 rounded-xl bg-sky-600 px-4 py-2 text-white shadow-sm hover:bg-sky-700 transition-colors hover:scale-105"
+        >
+          <Phone className="h-4 w-4" /> {formatPhone(phone)}
+        </a>
         {/* Mobile: sticky menu icon only */}
         <button
           className="md:hidden fixed top-2 right-4 h-9 w-9 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-md border border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200 z-[60]"
@@ -161,63 +158,6 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
           </div>
         )}
       </div>
-                <stop offset="1" stopColor="#06b6d4" />
-              </linearGradient>
-              <linearGradient id="blue3" x1="6" y1="22" x2="26" y2="22" gradientUnits="userSpaceOnUse">
-                <stop stopColor="#06b6d4" />
-                <stop offset="1" stopColor="#38bdf8" />
-              </linearGradient>
-            </defs>
-          </svg>
-        )}
-      </button>
-          <rect x="6" y="9" width="20" height="2.5" rx="1.25" fill="url(#blue1)" />
-          <rect x="6" y="15" width="20" height="2.5" rx="1.25" fill="url(#blue2)" />
-          <rect x="6" y="21" width="20" height="2.5" rx="1.25" fill="url(#blue3)" />
-          <defs>
-            <linearGradient id="blue1" x1="6" y1="10" x2="26" y2="10" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#38bdf8" />
-              <stop offset="1" stopColor="#0ea5e9" />
-            </linearGradient>
-            <linearGradient id="blue2" x1="6" y1="16" x2="26" y2="16" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#0ea5e9" />
-              <stop offset="1" stopColor="#06b6d4" />
-            </linearGradient>
-            <linearGradient id="blue3" x1="6" y1="22" x2="26" y2="22" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#06b6d4" />
-              <stop offset="1" stopColor="#38bdf8" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </button>
-        {mobileMenuOpen && (
-          <div
-            className="fixed inset-0 z-50 bg-gradient-to-br from-sky-100/80 via-white/90 to-blue-100/80 backdrop-blur-sm flex items-start justify-end"
-            onClick={handleMenuBgClick}
-            role="presentation"
-          >
-            <div
-              className="bg-white rounded-2xl shadow-xl mt-4 mr-4 p-4 w-64 flex flex-col gap-4 animate-fade-in border border-sky-200"
-              style={{ boxShadow: '0 4px 16px rgba(0, 180, 255, 0.10)' }}
-            >
-              <button className="self-end text-2xl text-sky-600 hover:text-sky-800 transition-colors" onClick={closeMenu} aria-label="Close menu">&times;</button>
-              <a href="#offerings" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>Offerings</a>
-              <a href="#journey" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>The Journey</a>
-              <a href="#boat" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>The Boat</a>
-              <a href="#faq" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>FAQ</a>
-              <a href="#booking" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>Book</a>
-              <a href="#location" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>Location</a>
-            </div>
-          </div>
-        )}
-        
-        {/* Desktop Call Button */}
-        <a 
-          href={`tel:${phone}`} 
-          className="hidden md:inline-flex items-center gap-2 rounded-xl bg-sky-600 px-4 py-2 text-white shadow-sm hover:bg-sky-700 transition-colors hover:scale-105"
-        >
-          <Phone className="h-4 w-4" /> {formatPhone(phone)}
-        </a>
     </header>
   );
 }
@@ -238,8 +178,7 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-blue-400/20 to-transparent rounded-t-full" />
         <div className="absolute bottom-0 right-0 w-full h-24 bg-gradient-to-t from-cyan-400/15 to-transparent rounded-t-full" style={{ transform: 'translateX(20px)' }} />
       </div>
-
-  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 w-full mt-16 lg:mt-0">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 w-full mt-16 lg:mt-0">
         {/* Desktop: hero content and slideshow side-by-side */}
         <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
@@ -277,94 +216,56 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
               </div>
               <div className="flex items-center gap-2 text-sm text-slate-600">
                 <Star className="h-4 w-4 text-yellow-500" />
-                return (
-                  <>
-                    {/* SVG gradients for menu icon */}
-                    <svg width="0" height="0">
-                      <defs>
-                        <linearGradient id="blue1" x1="6" y1="10" x2="26" y2="10" gradientUnits="userSpaceOnUse">
-                          <stop stopColor="#38bdf8" />
-                          <stop offset="1" stopColor="#0ea5e9" />
-                        </linearGradient>
-                        <linearGradient id="blue2" x1="6" y1="16" x2="26" y2="16" gradientUnits="userSpaceOnUse">
-                          <stop stopColor="#0ea5e9" />
-                          <stop offset="1" stopColor="#06b6d4" />
-                        </linearGradient>
-                        <linearGradient id="blue3" x1="6" y1="22" x2="26" y2="22" gradientUnits="userSpaceOnUse">
-                          <stop stopColor="#06b6d4" />
-                          <stop offset="1" stopColor="#38bdf8" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    <div>
-                      {/* Desktop header: normal, mobile header: not sticky */}
-                      <header className="w-full z-50 backdrop-blur bg-gradient-to-r from-sky-300 via-blue-300 to-cyan-300 border-b border-sky-300/70">
-                        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
-                          {/* Logo: desktop and mobile */}
-                          <a href="#top" className="flex items-center gap-3 font-semibold hover:scale-105 transition-transform md:static fixed top-2 left-4 z-50">
-                            <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-sky-600 text-white shadow-sm">
-                              <Ship className="h-5 w-5" />
-                            </span>
-                            <span className="text-slate-900 hidden md:block">Sail Long Beach</span>
-                            <span className="text-slate-900 md:hidden font-bold text-base">SLB</span>
-                          </a>
-                          <nav className="hidden md:flex items-center gap-6 text-sm text-slate-600">
-                            <a href="#offerings" className="hover:text-sky-600 font-semibold transition-colors">Offerings</a>
-                            <a href="#journey" className="hover:text-sky-600 font-semibold transition-colors">The Journey</a>
-                            <a href="#boat" className="hover:text-sky-600 font-semibold transition-colors">The Boat</a>
-                            <a href="#faq" className="hover:text-sky-600 font-semibold transition-colors">FAQ</a>
-                            <a href="#booking" className="hover:text-sky-600 font-semibold transition-colors">Book</a>
-                            <a href="#location" className="hover:text-sky-600 font-semibold transition-colors">Location</a>
-                          </nav>
-                          {/* Desktop Call Button: now inside flex row */}
-                          <a 
-                            href={`tel:${phone}`} 
-                            className="hidden md:inline-flex items-center gap-2 rounded-xl bg-sky-600 px-4 py-2 text-white shadow-sm hover:bg-sky-700 transition-colors hover:scale-105"
-                          >
-                            <Phone className="h-4 w-4" /> {formatPhone(phone)}
-                          </a>
-                        </div>
-                      </header>
-                      {/* Mobile: sticky menu icon only */}
-                      <button
-                        className="md:hidden fixed top-2 right-4 h-9 w-9 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-md border border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200 z-[60]"
-                        style={{ boxShadow: '0 2px 8px rgba(0, 180, 255, 0.10)' }}
-                        onClick={() => mobileMenuOpen ? closeMenu() : openMenu()}
-                        aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-                      >
-                        {mobileMenuOpen ? (
-                          <span className="text-2xl text-sky-600">&times;</span>
-                        ) : (
-                          <svg className="h-5 w-5" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="6" y="9" width="20" height="2.5" rx="1.25" fill="url(#blue1)" />
-                            <rect x="6" y="15" width="20" height="2.5" rx="1.25" fill="url(#blue2)" />
-                            <rect x="6" y="21" width="20" height="2.5" rx="1.25" fill="url(#blue3)" />
-                          </svg>
-                        )}
-                      </button>
-                      {/* Mobile menu popup */}
-                      {mobileMenuOpen && (
-                        <div
-                          className="fixed inset-0 z-50 bg-gradient-to-br from-sky-100/80 via-white/90 to-blue-100/80 backdrop-blur-sm flex items-start justify-end"
-                          onClick={handleMenuBgClick}
-                          role="presentation"
-                        >
-                          <div
-                            className="bg-white rounded-2xl shadow-xl mt-4 mr-4 p-4 w-64 flex flex-col gap-4 animate-fade-in border border-sky-200"
-                            style={{ boxShadow: '0 4px 16px rgba(0, 180, 255, 0.10)' }}
-                          >
-                            <button className="self-end text-2xl text-sky-600 hover:text-sky-800 transition-colors" onClick={closeMenu} aria-label="Close menu">&times;</button>
-                            <a href="#offerings" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>Offerings</a>
-                            <a href="#journey" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>The Journey</a>
-                            <a href="#boat" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>The Boat</a>
-                            <a href="#faq" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>FAQ</a>
-                            <a href="#booking" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>Book</a>
-                            <a href="#location" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>Location</a>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </>
+                <span>5.0 Rating</span>
+              </div>
+            </div>
+          </div>
+          {/* Slideshow or hero image can go here */}
+          <div className="w-full h-full flex items-center justify-center">
+            <HeroSlideshow />
+            {/* Remove desktop icons below slideshow */}
+          </div>
+        </div>
+        {/* Mobile: stacked hero content */}
+        <div className="lg:hidden flex flex-col items-center gap-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-sky-100 to-blue-100 border border-sky-200">
+            <Droplets className="h-4 w-4 text-sky-600" />
+            <p className="text-sm font-medium text-sky-700">
+              Long Beach • Private & Small‑Group
+            </p>
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight text-center">
+            Sailing Lessons, Catalina Trips,
+            <span className="block bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
+              Whale Watching & More
+            </span>
+          </h1>
+          <p className="text-base sm:text-lg text-slate-600 max-w-prose leading-relaxed text-center">
+            Learn the ropes, set a course to Catalina, glide on paddle boards, or meet migrating giants. Crafted experiences from the Long Beach waterfront—designed for learning, adventure, and pure ocean joy.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <Button size="lg" className="ripple-effect bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 text-white px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95">
+              <Sparkles className="h-5 w-5 mr-2" />
+              Book your spot
+            </Button>
+            <Button size="lg" variant="outline" className="ripple-effect border-2 border-sky-600 text-sky-600 hover:bg-sky-50 px-8 py-4 rounded-2xl hover:scale-105 active:scale-95 transition-all duration-300">
+              <Play className="h-5 w-5 mr-2" />
+              Watch Video
+            </Button>
+          </div>
+          {/* Trust indicators */}
+          <div className="flex flex-wrap items-center gap-6 pt-4 justify-center">
+            <div className="flex items-center gap-2 text-sm text-slate-600">
+              <Shield className="h-4 w-4 text-green-500" />
+              <span>Licensed & Insured</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-slate-600">
+              <Star className="h-4 w-4 text-yellow-500" />
+              <span>5.0 Rating</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
@@ -1308,34 +1209,32 @@ function Footer({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
 
 function CallNowFloating({ phone, formatPhone }: { phone: string; formatPhone: (phone: string) => string }) {
   return (
-    <div className="fixed bottom-6 left-6 z-50 md:hidden">
-      {/* 3 Round Icons Stacked Vertically */}
-      <div className="flex flex-col gap-3">
-        {/* Call Icon */}
+    <div className="fixed bottom-6 left-4 z-50 md:hidden">
+      {/* 3 Round Icons Stacked Vertically, 30% smaller */}
+      <div className="flex flex-col gap-2 items-start">
+        {/* Call Icon - blue gradient, phone */}
         <a
           href={`tel:${phone}`}
-          className="ripple-effect inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-sky-600 to-blue-600 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 active:scale-95"
+          className="ripple-effect inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-sky-500 to-blue-500 text-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95"
+          aria-label="Call Now"
         >
-          <div className="relative">
-            <Phone className="h-6 w-6" />
-            <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse" />
-          </div>
+          <Phone className="h-5 w-5 text-white" />
         </a>
-        
-        {/* Book Icon */}
+        {/* Book Icon - orange gradient, calendar */}
         <a
           href="#booking"
-          className="ripple-effect inline-flex items-center justify-center w-14 h-14 rounded-full bg-white text-sky-600 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 border-2 border-sky-200"
+          className="ripple-effect inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-yellow-400 text-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95"
+          aria-label="Book Lesson"
         >
-          <Calendar className="h-6 w-6" />
+          <Calendar className="h-5 w-5 text-white" />
         </a>
-        
-        {/* Tours Icon */}
+        {/* Tours Icon - green gradient, sparkles */}
         <a
           href="#offerings"
-          className="ripple-effect inline-flex items-center justify-center w-14 h-14 rounded-full bg-white text-sky-600 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 border-2 border-sky-200"
+          className="ripple-effect inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-teal-400 text-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95"
+          aria-label="View Adventures"
         >
-          <Sparkles className="h-6 w-6" />
+          <Sparkles className="h-5 w-5 text-white" />
         </a>
       </div>
     </div>
