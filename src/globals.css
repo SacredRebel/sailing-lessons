@@ -151,6 +151,20 @@
     .wave-animation {
       animation-duration: 6s;
     }
+    
+    /* Prevent horizontal scrolling */
+    body { 
+      overflow-x: hidden; 
+    }
+    
+    * { 
+      max-width: 100%; 
+    }
+    
+    /* Ensure all containers respect viewport width */
+    .container, .mx-auto { 
+      max-width: 100vw; 
+    }
   }
 
   /* Touch-friendly interactions */

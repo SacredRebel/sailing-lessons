@@ -46,9 +46,9 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-white text-slate-800">
+    <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-white text-slate-800 overflow-x-hidden">
       <Header phone={phone} formatPhone={formatPhone} />
-      <main>
+      <main className="overflow-x-hidden">
         <Hero phone={phone} formatPhone={formatPhone} />
         <Journey />
         <Offerings phone={phone} formatPhone={formatPhone} />
@@ -181,40 +181,67 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
           </div>
         </div>
 
-        {/* Mobile Hero Background Image */}
-        <div className="lg:hidden absolute inset-0 -z-10">
-          <OptimizedImage
-            src={images.hero.sailing.src}
-            alt={images.hero.sailing.alt}
-            className="w-full h-full object-cover"
-            priority={true}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-        </div>
-
-        {/* Mobile Hero Content Overlay */}
-        <div className="lg:hidden relative z-10 text-white text-center pt-20 pb-32">
-          <div className="space-y-6">
-            <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight">
-              Sailing Lessons, Catalina Trips, 
-              <span className="block text-sky-300">
-                Whale Watching & More
-              </span>
-            </h1>
-            
-            <p className="text-lg text-white/90 max-w-md mx-auto leading-relaxed">
-              Learn the ropes, set a course to Catalina, glide on paddle boards, or meet migrating giants.
-            </p>
-            
-            <div className="flex flex-col items-center gap-4 pt-4">
-              <Button size="lg" className="ripple-effect bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 text-white px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95">
-                <Sparkles className="h-5 w-5 mr-2" />
-                Book your spot
-              </Button>
-              <Button size="lg" variant="outline" className="ripple-effect border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-2xl hover:scale-105 active:scale-95 transition-all duration-300">
-                <Play className="h-5 w-5 mr-2" />
-                Watch Video
-              </Button>
+        {/* Mobile Hero - Image First Layout */}
+        <div className="lg:hidden relative">
+          {/* Hero Image */}
+          <div className="relative h-96 w-full rounded-3xl overflow-hidden shadow-2xl">
+            <OptimizedImage
+              src={images.hero.sailing.src}
+              alt={images.hero.sailing.alt}
+              className="w-full h-full object-cover"
+              priority={true}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+          </div>
+          
+          {/* Content Below Image */}
+          <div className="text-center pt-8 pb-12">
+            <div className="space-y-6">
+              {/* Tag */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-sky-100 to-blue-100 border border-sky-200">
+                <Droplets className="h-4 w-4 text-sky-600" />
+                <p className="text-sm font-medium text-sky-700">
+                  Long Beach • Private & Small‑Group
+                </p>
+              </div>
+              
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+                Sailing Lessons, Catalina Trips, 
+                <span className="block bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
+                  Whale Watching & More
+                </span>
+              </h1>
+              
+              <p className="text-lg text-slate-600 max-w-md mx-auto leading-relaxed">
+                Learn the ropes, set a course to Catalina, glide on paddle boards, or meet migrating giants.
+              </p>
+              
+              <div className="flex flex-col items-center gap-4 pt-4">
+                <Button size="lg" className="ripple-effect bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 text-white px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95">
+                  <Sparkles className="h-5 w-5 mr-2" />
+                  Book your spot
+                </Button>
+                <Button size="lg" variant="outline" className="ripple-effect border-2 border-sky-600 text-sky-600 hover:bg-sky-50 px-8 py-4 rounded-2xl hover:scale-105 active:scale-95 transition-all duration-300">
+                  <Play className="h-5 w-5 mr-2" />
+                  Watch Video
+                </Button>
+              </div>
+              
+              {/* Trust indicators */}
+              <div className="flex flex-wrap items-center justify-center gap-6 pt-4">
+                <div className="flex items-center gap-2 text-sm text-slate-600">
+                  <Shield className="h-4 w-4 text-green-500" />
+                  <span>Licensed & Insured</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-slate-600">
+                  <Star className="h-4 w-4 text-yellow-500" />
+                  <span>5.0 Rating</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-slate-600">
+                  <Users className="h-4 w-4 text-blue-500" />
+                  <span>500+ Happy Sailors</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -494,17 +521,17 @@ function Offerings({ phone, formatPhone }: { phone: string; formatPhone: (phone:
               )}
               
               <Card className={`h-full group-hover:shadow-2xl transition-all duration-500 bg-gradient-to-br ${offering.bgColor} border-2 ${offering.borderColor} rounded-3xl overflow-hidden relative`}>
-                {/* Header with image and gradient overlay */}
-                <div className="h-40 relative overflow-hidden">
+                {/* Header with image and gradient overlay - 10% bigger */}
+                <div className="h-44 relative overflow-hidden">
                   <OptimizedImage
                     src={getOfferingImage(offering.title)}
                     alt={offering.title}
                     className="w-full h-full"
                     width={400}
-                    height={160}
+                    height={176}
                     quality={80}
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${offering.color} opacity-80`} />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${offering.color} opacity-60`} />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-white z-10">
                       {offering.icon}
