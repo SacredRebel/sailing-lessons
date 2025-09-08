@@ -299,6 +299,22 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
 }
 
 function Journey() {
+  // Calendar state and events
+  const [date, setDate] = useState(new Date());
+  const events = {
+    "2025-09-12": [
+      { title: "Sailing Lesson (Morning)", time: "9:00 AM – 12:00 PM" },
+      { title: "Whale Watching Tour", time: "2:00 PM – 5:00 PM" },
+    ],
+    "2025-09-14": [
+      { title: "Catalina Day Trip", time: "8:00 AM – 6:00 PM" },
+    ],
+    "2025-09-15": [
+      { title: "Sunset Paddle Boarding", time: "5:30 PM – 7:30 PM" },
+    ],
+  };
+  const formattedDate = date.toISOString().split("T")[0];
+  const dayEvents = events[formattedDate] || [];
   const journeySteps = [
     {
       icon: <Compass className="h-10 w-10" />,
@@ -357,7 +373,8 @@ function Journey() {
   ];
 
   return (
-    <section id="journey" className="py-24 bg-gradient-to-b from-white via-sky-50/30 to-slate-50 relative overflow-hidden">
+  <>
+  <section id="journey" className="py-24 bg-gradient-to-b from-white via-sky-50/30 to-slate-50 relative overflow-hidden">
       {/* Water-themed background elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-20 left-10 w-32 h-32 bg-blue-100/20 rounded-full blur-xl" />
@@ -420,6 +437,51 @@ function Journey() {
         </div>
       </div>
     </section>
+    {/* Adventure Calendar Section */}
+    <section className="py-20 px-6 bg-gray-50">
+      <div className="max-w-5xl mx-auto text-center mb-12">
+        <h2 className="text-4xl font-bold mb-4">Upcoming Events</h2>
+        <p className="text-gray-600">
+          Pick a date to see sailing lessons, trips, and special activities.
+        </p>
+      </div>
+      <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+        {/* Calendar */}
+        <div className="bg-white rounded-2xl shadow-lg p-6">
+          <Calendar
+            onChange={setDate}
+            value={date}
+            className="w-full"
+          />
+        </div>
+        {/* Events */}
+        <div className="bg-white rounded-2xl shadow-lg p-6">
+          <h3 className="text-2xl font-semibold mb-4">
+            {dayEvents.length > 0 ? "Available Events" : "No Events Scheduled"}
+          </h3>
+          <div className="space-y-4">
+            {dayEvents.length > 0 ? (
+              dayEvents.map((event, idx) => (
+                <Card key={idx} className="border border-gray-200 shadow-sm">
+                  <CardContent className="p-4 text-left">
+                    <h4 className="text-xl font-bold mb-2">{event.title}</h4>
+                    <p className="text-gray-700">{event.time}</p>
+                    <Button className="mt-3 bg-blue-500 hover:bg-blue-600 text-white rounded-xl">
+                      Reserve Spot
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              <p className="text-gray-600">
+                Select another date or call us for availability.
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+    </>
   );
 }
 
