@@ -107,7 +107,7 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
         </nav>
         
         {/* Mobile Menu Button */}
-        <button className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors">
+  <button className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors" onClick={openMenu}>
           <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
           </svg>
@@ -213,8 +213,8 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
           </div>
         </div>
         {/* Mobile: slideshow under title, no duplicate content */}
-        <div className="lg:hidden space-y-8 text-center">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+        <div className="lg:hidden space-y-4 text-center">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight mt-4">
             Sailing Lessons, Catalina Trips,
             <span className="block bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
               Whale Watching & More
@@ -644,7 +644,7 @@ function BoatSection() {
             </div>
           </div>
           {/* Add spacing above image for mobile */}
-          <div className="relative mt-8 lg:mt-0">
+          <div className="relative mt-16 lg:mt-0">
             <OptimizedImage
               src={images.sailing.boat.src}
               alt={images.sailing.boat.alt}
@@ -765,11 +765,11 @@ function Testimonial() {
               and we saw whales up close. The boat was perfect and the whole day was magical."
             </blockquote>
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-gradient-to-r from-sky-400 to-blue-500 rounded-full flex items-center justify-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-sky-400 to-blue-500 rounded-full flex items-center justify-center mt-6">
                 <span className="text-white font-bold text-xl">SJ</span>
               </div>
               <div>
-                <div className="font-semibold text-slate-900 text-lg">Sarah Johnson</div>
+                <div className="font-semibold text-slate-900 text-lg">James Miller</div>
                 <div className="text-slate-600">Whale Watching Adventure</div>
                 <div className="flex items-center gap-1 mt-1">
                   {[...Array(5)].map((_, i) => (
@@ -880,8 +880,8 @@ function GalleryPlaceholder() {
             <div 
               key={index} 
               className={`group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 ${
-                item.featured ? 'md:col-span-2 md:row-span-2' : 'aspect-square'
-              }`}
+                item.featured ? 'md:col-span-2 md:row-span-2' : ''
+              } aspect-square flex items-center justify-center`}
               onClick={() => openModal(index)}
               role="button"
               tabIndex={0}
@@ -942,9 +942,10 @@ function GalleryPlaceholder() {
             >
               &times;
             </button>
-            {/* Left arrow always present */}
+            {/* Left arrow always present, larger and touch-friendly on mobile */}
             <button
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-3xl font-bold bg-black/40 rounded-full p-2 hover:bg-black/70 transition"
+              className="absolute left-2 top-1/2 -translate-y-1/2 text-white text-4xl font-bold bg-black/50 rounded-full p-3 hover:bg-black/70 transition z-10 md:text-3xl md:p-2 md:left-4"
+              style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.25)' }}
               onClick={e => { e.stopPropagation(); showPrev(); }}
               aria-label="Previous image"
               tabIndex={0}
