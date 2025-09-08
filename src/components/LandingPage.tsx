@@ -80,7 +80,7 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
   };
 
   return (
-    <header className="w-full z-50 sticky top-0 backdrop-blur bg-gradient-to-r from-sky-300 via-blue-300 to-cyan-300 border-b border-sky-300/70">
+    <header className="w-full sticky top-0 z-[200] backdrop-blur bg-gradient-to-r from-sky-300 via-blue-300 to-cyan-300 border-b border-sky-300/70">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
         {/* Logo: desktop and mobile */}
         <a href="#top" className="flex items-center gap-3 font-semibold hover:scale-105 transition-transform md:static fixed top-2 left-4 z-50">
@@ -107,8 +107,8 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
         </a>
         {/* Mobile: sticky menu icon only */}
         <button
-          className="md:hidden sticky top-2 right-4 h-9 w-9 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-md border border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200 z-[100]"
-          style={{ boxShadow: '0 2px 8px rgba(0, 180, 255, 0.10)', position: 'sticky', float: 'right' }}
+          className="md:hidden fixed top-2 right-4 h-9 w-9 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-md border border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200 z-[100]"
+          style={{ boxShadow: '0 2px 8px rgba(0, 180, 255, 0.10)' }}
           onClick={() => mobileMenuOpen ? closeMenu() : openMenu()}
           aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
         >
@@ -182,7 +182,7 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 w-full mt-2 lg:mt-0">
         {/* Desktop: hero content and slideshow side-by-side */}
         <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center relative">
-          <div className="space-y-8">
+          <div className="space-y-8 flex flex-col justify-center">
             {/* Enhanced tag with rounded design */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-sky-100 to-blue-100 border border-sky-200">
               <Droplets className="h-4 w-4 text-sky-600" />
@@ -209,36 +209,34 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
                 Watch Video
               </Button>
             </div>
-            {/* Trust indicators and scroll at bottom for desktop */}
-            <div className="absolute left-0 right-0 bottom-8 flex flex-col items-center gap-4">
-              <div className="flex flex-row items-center justify-center gap-8">
-                <div className="flex items-center gap-2 text-base text-slate-600">
-                  <Shield className="h-5 w-5 text-green-500" />
-                  <span>Licensed & Insured</span>
-                </div>
-                <div className="flex items-center gap-2 text-base text-slate-600">
-                  <Star className="h-5 w-5 text-yellow-500" />
-                  <span>5.0 Rating</span>
-                </div>
-                <div className="flex items-center gap-2 text-base text-slate-600">
-                  <MapPin className="h-5 w-5 text-sky-500 animate-pulse" />
-                  <span>Local Expertise</span>
-                </div>
-              </div>
-              <div className="mt-2 flex flex-col items-center">
-                <span className="text-sm text-sky-600 font-semibold">Scroll to explore</span>
-                <ChevronDown className="h-8 w-8 text-sky-600 animate-bounce" />
-              </div>
-            </div>
           </div>
-          {/* Slideshow or hero image can go here */}
           <div className="w-full h-full flex items-center justify-center">
             <HeroSlideshow />
-            {/* Remove desktop icons below slideshow */}
+          </div>
+        </div>
+        {/* Desktop: trust indicators and scroll below hero, not overlaying slideshow */}
+        <div className="hidden lg:flex flex-col items-center gap-4 mt-12">
+          <div className="flex flex-row items-center justify-center gap-8">
+            <div className="flex items-center gap-2 text-base text-slate-600">
+              <Shield className="h-5 w-5 text-green-500" />
+              <span>Licensed & Insured</span>
+            </div>
+            <div className="flex items-center gap-2 text-base text-slate-600">
+              <Star className="h-5 w-5 text-yellow-500" />
+              <span>5.0 Rating</span>
+            </div>
+            <div className="flex items-center gap-2 text-base text-slate-600">
+              <MapPin className="h-5 w-5 text-sky-500 animate-pulse" />
+              <span>Local Expertise</span>
+            </div>
+          </div>
+          <div className="mt-2 flex flex-col items-center">
+            <span className="text-sm text-sky-600 font-semibold">Scroll to explore</span>
+            <ChevronDown className="h-8 w-8 text-sky-600 animate-bounce" />
           </div>
         </div>
         {/* Mobile: restructured hero content */}
-        <div className="lg:hidden flex flex-col items-center gap-8 relative">
+        <div className="lg:hidden flex flex-col items-center gap-8">
           {/* Title */}
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight text-center">
             Sailing Lessons, Catalina Trips,
@@ -272,26 +270,26 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
               Watch Video
             </Button>
           </div>
-          {/* Trust indicators and scroll at bottom for mobile */}
-          <div className="absolute left-0 right-0 bottom-8 flex flex-col items-center gap-4">
-            <div className="flex flex-row items-center justify-center gap-6">
-              <div className="flex items-center gap-2 text-sm text-slate-600">
-                <Shield className="h-4 w-4 text-green-500" />
-                <span>Licensed & Insured</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-slate-600">
-                <Star className="h-4 w-4 text-yellow-500" />
-                <span>5.0 Rating</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-slate-600">
-                <MapPin className="h-4 w-4 text-sky-500 animate-pulse" />
-                <span>Local Expertise</span>
-              </div>
+        </div>
+        {/* Mobile: trust indicators and scroll below hero, not overlaying */}
+        <div className="lg:hidden flex flex-col items-center gap-4 mt-8">
+          <div className="flex flex-row items-center justify-center gap-6">
+            <div className="flex items-center gap-2 text-sm text-slate-600">
+              <Shield className="h-4 w-4 text-green-500" />
+              <span>Licensed & Insured</span>
             </div>
-            <div className="mt-2 flex flex-col items-center">
-              <span className="text-sm text-sky-600 font-semibold">Scroll to explore</span>
-              <ChevronDown className="h-6 w-6 text-sky-600 animate-bounce" />
+            <div className="flex items-center gap-2 text-sm text-slate-600">
+              <Star className="h-4 w-4 text-yellow-500" />
+              <span>5.0 Rating</span>
             </div>
+            <div className="flex items-center gap-2 text-sm text-slate-600">
+              <MapPin className="h-4 w-4 text-sky-500 animate-pulse" />
+              <span>Local Expertise</span>
+            </div>
+          </div>
+          <div className="mt-2 flex flex-col items-center">
+            <span className="text-sm text-sky-600 font-semibold">Scroll to explore</span>
+            <ChevronDown className="h-6 w-6 text-sky-600 animate-bounce" />
           </div>
         </div>
       </div>

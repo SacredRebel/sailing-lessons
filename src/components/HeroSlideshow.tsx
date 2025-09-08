@@ -65,14 +65,6 @@ const HeroSlideshow: React.FC = () => {
         <div className="text-white">
           <h3 className="text-3xl font-bold mb-2">{slides[currentSlide].title}</h3>
           <p className="text-lg opacity-90 mb-4">{slides[currentSlide].description}</p>
-          <div className="flex items-center gap-4">
-            <button className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full hover:bg-white/30 transition-colors">
-              Learn More
-            </button>
-            <button className="bg-sky-600 hover:bg-sky-700 px-6 py-2 rounded-full transition-colors">
-              Book Now
-            </button>
-          </div>
         </div>
       </div>
 
