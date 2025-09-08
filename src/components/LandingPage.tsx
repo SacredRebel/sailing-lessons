@@ -780,7 +780,6 @@ function BoatSection() {
         </div>
       </div>
   </section>
-}
 
 function WhyUs() {
   const reasons = [
@@ -815,9 +814,29 @@ function WhyUs() {
             In a world of screens, we craft real connections—expert guidance, small groups, and unforgettable sunsets
           </p>
         </div>
-
-  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-// ...existing code...
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {reasons.map((reason, index) => (
+            <div key={reason.title}>
+              <Card className="h-full p-6 text-center group hover:shadow-xl transition-all duration-300">
+                <div className="inline-flex p-4 rounded-2xl bg-sky-100 text-sky-600 mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {reason.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-slate-900 mb-2">{reason.title}</h3>
+                <p className="text-slate-600">{reason.description}</p>
+              </Card>
+            </div>
+          ))}
+        </div>
+        <div className="mt-16 text-center">
+          <blockquote className="text-2xl font-medium text-slate-700 italic mb-4">
+            "A day that unfolded like magic—from lessons to whale songs!"
+          </blockquote>
+          <p className="text-slate-600">— Happy Sailor</p>
+        </div>
+      </div>
+    </section>
+  );
+}
 // ...existing code...
           {reasons.map((reason, index) => (
             <div key={reason.title}>
@@ -1356,5 +1375,4 @@ function CallNowFloating({ phone, formatPhone }: { phone: string; formatPhone: (
   );
 }
 
-}
 export default LandingPage;
