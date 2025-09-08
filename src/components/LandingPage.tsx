@@ -165,7 +165,6 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
         >
           <Phone className="h-4 w-4" /> {formatPhone(phone)}
         </a>
-      </div>
     </header>
   );
 }
