@@ -112,136 +112,66 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
       <div className="absolute inset-0 -z-10">
         <div className="h-full w-full bg-gradient-to-br from-sky-100 via-sky-50 to-white" />
         <div className="absolute inset-0 opacity-30 bg-gradient-to-r from-blue-200/40 to-cyan-200/40" />
-        
         {/* Floating water droplets */}
         <div className="absolute top-20 left-10 w-4 h-4 bg-blue-300/60 rounded-full float-animation" style={{ animationDelay: '0s' }} />
         <div className="absolute top-40 right-20 w-6 h-6 bg-cyan-300/50 rounded-full float-animation" style={{ animationDelay: '2s' }} />
         <div className="absolute top-60 left-1/4 w-3 h-3 bg-sky-300/70 rounded-full float-animation" style={{ animationDelay: '4s' }} />
         <div className="absolute top-80 right-1/3 w-5 h-5 bg-blue-200/60 rounded-full float-animation" style={{ animationDelay: '1s' }} />
-        
         {/* Wave patterns */}
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-blue-400/20 to-transparent rounded-t-full" />
         <div className="absolute bottom-0 right-0 w-full h-24 bg-gradient-to-t from-cyan-400/15 to-transparent rounded-t-full" style={{ transform: 'translateX(20px)' }} />
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
-            {/* Enhanced tag with rounded design */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-sky-100 to-blue-100 border border-sky-200">
-              <Droplets className="h-4 w-4 text-sky-600" />
-              <p className="text-sm font-medium text-sky-700">
-                Long Beach • Private & Small‑Group
-              </p>
-            </div>
-            
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
-              Sailing Lessons, Catalina Trips, 
-              <span className="block bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
-                Whale Watching & More
-              </span>
-            </h1>
-            
-            <p className="text-lg lg:text-xl text-slate-600 max-w-prose leading-relaxed">
-              Learn the ropes, set a course to Catalina, glide on paddle boards, or meet migrating giants. 
-              Crafted experiences from the Long Beach waterfront—designed for learning, adventure, and pure ocean joy.
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-20 w-full">
+        <div className="space-y-8 text-center">
+          {/* Enhanced tag with rounded design */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-sky-100 to-blue-100 border border-sky-200 justify-center">
+            <Droplets className="h-4 w-4 text-sky-600" />
+            <p className="text-sm font-medium text-sky-700">
+              Long Beach • Private & Small‑Group
             </p>
-            
-            <div className="flex flex-col sm:flex-row items-start gap-4">
-              <Button size="lg" className="ripple-effect bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 text-white px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95">
-                <Sparkles className="h-5 w-5 mr-2" />
-                Book your spot
-              </Button>
-              <Button size="lg" variant="outline" className="ripple-effect border-2 border-sky-600 text-sky-600 hover:bg-sky-50 px-8 py-4 rounded-2xl hover:scale-105 active:scale-95 transition-all duration-300">
-                <Play className="h-5 w-5 mr-2" />
-                Watch Video
-              </Button>
-            </div>
-
-            {/* Trust indicators */}
-            <div className="flex flex-wrap items-center gap-6 pt-4">
-              <div className="flex items-center gap-2 text-sm text-slate-600">
-                <Shield className="h-4 w-4 text-green-500" />
-                <span>Licensed & Insured</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-slate-600">
-                <Star className="h-4 w-4 text-yellow-500" />
-                <span>5.0 Rating</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-slate-600">
-                <Users className="h-4 w-4 text-blue-500" />
-                <span>500+ Happy Sailors</span>
-              </div>
-            </div>
           </div>
 
-          {/* Hero Slideshow - Desktop only */}
-          <div className="relative hidden lg:block">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
+            Sailing Lessons, Catalina Trips,
+            <span className="block bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
+              Whale Watching & More
+            </span>
+          </h1>
+
+          <p className="text-lg lg:text-xl text-slate-600 max-w-prose mx-auto leading-relaxed">
+            Learn the ropes, set a course to Catalina, glide on paddle boards, or meet migrating giants. Crafted experiences from the Long Beach waterfront—designed for learning, adventure, and pure ocean joy.
+          </p>
+
+          {/* Slideshow under the title for all devices */}
+          <div className="w-full max-w-2xl mx-auto">
             <HeroSlideshow />
           </div>
-        </div>
 
-        {/* Mobile Hero - Image First Layout */}
-        <div className="lg:hidden relative">
-          {/* Hero Image */}
-          <div className="relative h-96 w-full rounded-3xl overflow-hidden shadow-2xl">
-            <OptimizedImage
-              src={images.hero.sailing.src}
-              alt={images.hero.sailing.alt}
-              className="w-full h-full object-cover"
-              priority={true}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <Button size="lg" className="ripple-effect bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 text-white px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95">
+              <Sparkles className="h-5 w-5 mr-2" />
+              Book your spot
+            </Button>
+            <Button size="lg" variant="outline" className="ripple-effect border-2 border-sky-600 text-sky-600 hover:bg-sky-50 px-8 py-4 rounded-2xl hover:scale-105 active:scale-95 transition-all duration-300">
+              <Play className="h-5 w-5 mr-2" />
+              Watch Video
+            </Button>
           </div>
-          
-          {/* Content Below Image */}
-          <div className="text-center pt-8 pb-12">
-            <div className="space-y-6">
-              {/* Tag */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-sky-100 to-blue-100 border border-sky-200">
-                <Droplets className="h-4 w-4 text-sky-600" />
-                <p className="text-sm font-medium text-sky-700">
-                  Long Beach • Private & Small‑Group
-                </p>
-              </div>
-              
-              <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
-                Sailing Lessons, Catalina Trips, 
-                <span className="block bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
-                  Whale Watching & More
-                </span>
-              </h1>
-              
-              <p className="text-lg text-slate-600 max-w-md mx-auto leading-relaxed">
-                Learn the ropes, set a course to Catalina, glide on paddle boards, or meet migrating giants.
-              </p>
-              
-              <div className="flex flex-col items-center gap-4 pt-4">
-                <Button size="lg" className="ripple-effect bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 text-white px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95">
-                  <Sparkles className="h-5 w-5 mr-2" />
-                  Book your spot
-                </Button>
-                <Button size="lg" variant="outline" className="ripple-effect border-2 border-sky-600 text-sky-600 hover:bg-sky-50 px-8 py-4 rounded-2xl hover:scale-105 active:scale-95 transition-all duration-300">
-                  <Play className="h-5 w-5 mr-2" />
-                  Watch Video
-                </Button>
-              </div>
-              
-              {/* Trust indicators */}
-              <div className="flex flex-wrap items-center justify-center gap-6 pt-4">
-                <div className="flex items-center gap-2 text-sm text-slate-600">
-                  <Shield className="h-4 w-4 text-green-500" />
-                  <span>Licensed & Insured</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-slate-600">
-                  <Star className="h-4 w-4 text-yellow-500" />
-                  <span>5.0 Rating</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-slate-600">
-                  <Users className="h-4 w-4 text-blue-500" />
-                  <span>500+ Happy Sailors</span>
-                </div>
-              </div>
+
+          {/* Trust indicators */}
+          <div className="flex flex-wrap items-center justify-center gap-6 pt-4">
+            <div className="flex items-center gap-2 text-sm text-slate-600">
+              <Shield className="h-4 w-4 text-green-500" />
+              <span>Licensed & Insured</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-slate-600">
+              <Star className="h-4 w-4 text-yellow-500" />
+              <span>5.0 Rating</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-slate-600">
+              <Users className="h-4 w-4 text-blue-500" />
+              <span>500+ Happy Sailors</span>
             </div>
           </div>
         </div>
@@ -251,10 +181,10 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
           <span className="text-sm text-slate-500 font-medium">Scroll to explore</span>
           <div className="w-6 h-10 border-2 border-sky-400 rounded-full flex justify-center">
             <div className="w-1 h-3 bg-sky-400 rounded-full mt-2 float-animation" />
-            </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
   );
 }
 
@@ -346,26 +276,22 @@ function Journey() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {journeySteps.map((step, index) => (
-            <div key={step.title} className="relative group">
+            <div key={step.title} className="relative group w-full max-w-xs mx-auto">
               {/* Connection line for desktop */}
               {index < journeySteps.length - 1 && (
                 <div className="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-sky-200 to-transparent z-0" />
               )}
-              
-              <Card className={`h-full p-8 text-center group-hover:shadow-2xl transition-all duration-500 bg-gradient-to-br ${step.bgColor} border-2 ${step.borderColor} rounded-3xl relative overflow-hidden`}>
+              <Card className={`h-full p-4 sm:p-8 text-center group-hover:shadow-2xl transition-all duration-500 bg-gradient-to-br ${step.bgColor} border-2 ${step.borderColor} rounded-3xl relative overflow-hidden`}>
                 {/* Step number */}
                 <div className="absolute top-4 right-4 w-8 h-8 bg-white/80 rounded-full flex items-center justify-center text-sm font-bold text-slate-600">
                   {step.number}
                 </div>
-                
-                {/* Icon container with enhanced design */}
-                <div className={`inline-flex p-6 rounded-3xl bg-gradient-to-r ${step.color} text-white mb-6 group-hover:scale-110 transition-all duration-300 shadow-lg`}>
+                {/* Icon container with enhanced design and increased image visibility */}
+                <div className={`inline-flex p-6 rounded-3xl bg-gradient-to-r ${step.color} text-white mb-6 group-hover:scale-110 transition-all duration-300 shadow-lg brightness-110 opacity-95`} style={{ filter: 'brightness(1.2)' }}>
                   {step.icon}
                 </div>
-                
                 <h3 className="text-2xl font-bold text-slate-900 mb-4">{step.title}</h3>
                 <p className="text-slate-600 leading-relaxed text-lg">{step.description}</p>
-                
                 {/* Decorative elements */}
                 <div className="absolute -top-2 -right-2 w-16 h-16 bg-gradient-to-br from-white/20 to-transparent rounded-full blur-sm" />
                 <div className="absolute -bottom-2 -left-2 w-12 h-12 bg-gradient-to-tr from-white/10 to-transparent rounded-full blur-sm" />
@@ -799,6 +725,30 @@ function Testimonial() {
 }
 
 function GalleryPlaceholder() {
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const galleryImages = images.gallery;
+
+  const openModal = (index: number) => {
+    setCurrentIndex(index);
+    setModalOpen(true);
+  };
+  const closeModal = () => setModalOpen(false);
+  const showPrev = () => setCurrentIndex((i) => (i === 0 ? galleryImages.length - 1 : i - 1));
+  const showNext = () => setCurrentIndex((i) => (i === galleryImages.length - 1 ? 0 : i + 1));
+
+  // Keyboard navigation
+  React.useEffect(() => {
+    if (!modalOpen) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'ArrowRight') showNext();
+      if (e.key === 'Escape') closeModal();
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [modalOpen]);
+
   return (
     <section className="py-24 bg-gradient-to-b from-sky-50/30 via-white to-slate-50 relative overflow-hidden">
       {/* Water-themed background elements */}
@@ -829,23 +779,26 @@ function GalleryPlaceholder() {
 
         {/* Main gallery grid with real images */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
-          {images.gallery.map((item, index) => (
+          {galleryImages.map((item, index) => (
             <div 
               key={index} 
               className={`group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 ${
                 item.featured ? 'md:col-span-2 md:row-span-2' : 'aspect-square'
               }`}
+              onClick={() => openModal(index)}
+              role="button"
+              tabIndex={0}
+              aria-label={`Open image ${item.title}`}
             >
               <OptimizedImage
                 src={item.src}
                 alt={item.alt}
                 title={item.title}
-                className="w-full h-full"
+                className="w-full h-full cursor-pointer"
                 width={item.featured ? 600 : 300}
                 height={item.featured ? 400 : 300}
                 quality={85}
               />
-
               {/* Content overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                 <div className="text-white">
@@ -861,12 +814,10 @@ function GalleryPlaceholder() {
                   </p>
                 </div>
               </div>
-
               {/* Category badge */}
               <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-medium text-slate-700">
                 {item.category}
               </div>
-
               {/* Featured badge */}
               {item.featured && (
                 <div className="absolute top-3 right-3 bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-2 py-1 rounded-full text-xs font-bold">
@@ -876,6 +827,50 @@ function GalleryPlaceholder() {
             </div>
           ))}
         </div>
+
+        {/* Modal for image preview and swipe */}
+        {modalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+            <button
+              className="absolute top-8 right-8 text-white text-3xl font-bold bg-black/40 rounded-full p-2 hover:bg-black/70 transition"
+              onClick={closeModal}
+              aria-label="Close preview"
+            >
+              &times;
+            </button>
+            <button
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-3xl font-bold bg-black/40 rounded-full p-2 hover:bg-black/70 transition"
+              onClick={showPrev}
+              aria-label="Previous image"
+            >
+              &#8592;
+            </button>
+            <div className="max-w-full max-h-full flex flex-col items-center justify-center">
+              <OptimizedImage
+                src={galleryImages[currentIndex].src}
+                alt={galleryImages[currentIndex].alt}
+                title={galleryImages[currentIndex].title}
+                className="rounded-2xl shadow-2xl max-w-[90vw] max-h-[80vh] object-contain"
+                width={800}
+                height={600}
+                quality={95}
+              />
+              <div className="mt-4 text-white text-lg font-semibold text-center">
+                {galleryImages[currentIndex].title}
+              </div>
+              <div className="text-white/80 text-sm text-center">
+                {galleryImages[currentIndex].category}
+              </div>
+            </div>
+            <button
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-3xl font-bold bg-black/40 rounded-full p-2 hover:bg-black/70 transition"
+              onClick={showNext}
+              aria-label="Next image"
+            >
+              &#8594;
+            </button>
+          </div>
+        )}
 
         {/* Video section */}
         <div className="text-center">
