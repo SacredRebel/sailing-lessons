@@ -66,6 +66,26 @@ const LandingPage = () => {
 };
 
 function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: string) => string }) {
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [menuAnimating, setMenuAnimating] = React.useState(false);
+
+  // Open menu with animation
+  const openMenu = () => {
+    setMenuAnimating(true);
+    setMobileMenuOpen(true);
+  };
+  // Close menu with animation
+  const closeMenu = () => {
+    setMenuAnimating(true);
+    setTimeout(() => {
+      setMobileMenuOpen(false);
+      setMenuAnimating(false);
+    }, 300);
+  };
+  // Close menu on background click
+  const handleMenuBgClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) closeMenu();
+  };
   return (
     <header className="sticky top-0 z-40 backdrop-blur bg-white/90 border-b border-slate-200/60">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -92,6 +112,25 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
+        {/* Mobile Menu Overlay with animation */}
+        {(mobileMenuOpen || menuAnimating) && (
+          <div
+            className={`fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex flex-col transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-100' : 'opacity-0'}`}
+            onClick={handleMenuBgClick}
+            role="presentation"
+          >
+            <div
+              className={`bg-white rounded-b-2xl shadow-xl mx-2 mt-2 p-6 flex flex-col gap-6 transition-transform duration-300 ${mobileMenuOpen ? 'translate-y-0' : '-translate-y-20'} animate-slide-down`}
+            >
+              <button className="self-end text-2xl text-slate-600 hover:text-slate-900" onClick={closeMenu} aria-label="Close menu">&times;</button>
+              <a href="#offerings" className="text-lg font-semibold text-slate-700 hover:text-sky-600 transition-colors" onClick={closeMenu}>Offerings</a>
+              <a href="#journey" className="text-lg font-semibold text-slate-700 hover:text-sky-600 transition-colors" onClick={closeMenu}>The Journey</a>
+              <a href="#boat" className="text-lg font-semibold text-slate-700 hover:text-sky-600 transition-colors" onClick={closeMenu}>The Boat</a>
+              <a href="#faq" className="text-lg font-semibold text-slate-700 hover:text-sky-600 transition-colors" onClick={closeMenu}>FAQ</a>
+              <a href="#booking" className="text-lg font-semibold text-slate-700 hover:text-sky-600 transition-colors" onClick={closeMenu}>Book</a>
+            </div>
+          </div>
+        )}
         
         {/* Desktop Call Button */}
         <a 
@@ -190,7 +229,13 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
           <div className="w-full max-w-2xl mx-auto">
             <HeroSlideshow />
           </div>
-          <p className="text-lg text-slate-600 max-w-md mx-auto leading-relaxed">
+          {/* 3 titles block - add spacing below for mobile */}
+          <div className="mt-6 mb-4">
+            <div className="font-bold text-lg text-sky-700 mb-2">Long Beach Private & Small‑Group</div>
+            <div className="font-bold text-lg text-sky-700 mb-2">Catalina Trips</div>
+            <div className="font-bold text-lg text-sky-700">Whale Watching & More</div>
+          </div>
+          <p className="text-lg text-slate-600 max-w-md mx-auto leading-relaxed mb-4">
             Learn the ropes, set a course to Catalina, glide on paddle boards, or meet migrating giants. Crafted experiences from the Long Beach waterfront—designed for learning, adventure, and pure ocean joy.
           </p>
           <div className="flex flex-col items-center gap-4 pt-4">
@@ -218,6 +263,8 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
               <span>500+ Happy Sailors</span>
             </div>
           </div>
+          {/* Add spacing before scroll to explore for mobile */}
+          <div className="mt-8" />
         </div>
         {/* Enhanced scroll indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2">
@@ -494,7 +541,7 @@ function Offerings({ phone, formatPhone }: { phone: string; formatPhone: (phone:
                   <OptimizedImage
                     src={getOfferingImage(offering.title)}
                     alt={offering.title}
-                    className="w-full h-full" style={{ filter: 'brightness(1.2)' }}
+                    className="w-full h-full brightness-110"
                     width={400}
                     height={176}
                     quality={80}
@@ -602,8 +649,8 @@ function BoatSection() {
               </div>
             </div>
           </div>
-
-          <div className="relative">
+          {/* Add spacing above image for mobile */}
+          <div className="relative mt-8 lg:mt-0">
             <OptimizedImage
               src={images.sailing.boat.src}
               alt={images.sailing.boat.alt}
@@ -738,9 +785,8 @@ function Testimonial() {
               </div>
             </div>
           </div>
-
-          {/* Testimonial image */}
-          <div className="relative">
+          {/* Add spacing above image for mobile */}
+          <div className="relative mt-8 lg:mt-0">
             <OptimizedImage
               src={images.whaleWatching.encounter.src}
               alt="Happy customer with whale"
@@ -770,6 +816,7 @@ function Testimonial() {
 function GalleryPlaceholder() {
   const [modalOpen, setModalOpen] = React.useState(false);
   const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [touchStartX, setTouchStartX] = React.useState<number | null>(null);
   const galleryImages = images.gallery;
 
   const openModal = (index: number) => {
@@ -791,6 +838,19 @@ function GalleryPlaceholder() {
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
   }, [modalOpen]);
+
+  // Touch swipe for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchEndX - touchStartX;
+    if (diff > 50) showPrev();
+    if (diff < -50) showNext();
+    setTouchStartX(null);
+  };
 
   return (
     <section className="py-24 bg-gradient-to-b from-sky-50/30 via-white to-slate-50 relative overflow-hidden">
@@ -873,7 +933,13 @@ function GalleryPlaceholder() {
 
         {/* Modal for image preview and swipe */}
         {modalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={closeModal} role="presentation">
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+            onClick={closeModal}
+            role="presentation"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             <button
               className="absolute top-8 right-8 text-white text-3xl font-bold bg-black/40 rounded-full p-2 hover:bg-black/70 transition"
               onClick={closeModal}
@@ -882,6 +948,7 @@ function GalleryPlaceholder() {
             >
               &times;
             </button>
+            {/* Left arrow always present */}
             <button
               className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-3xl font-bold bg-black/40 rounded-full p-2 hover:bg-black/70 transition"
               onClick={e => { e.stopPropagation(); showPrev(); }}
@@ -907,6 +974,7 @@ function GalleryPlaceholder() {
                 {galleryImages[currentIndex].category}
               </div>
             </div>
+            {/* Right arrow always present */}
             <button
               className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-3xl font-bold bg-black/40 rounded-full p-2 hover:bg-black/70 transition"
               onClick={e => { e.stopPropagation(); showNext(); }}
