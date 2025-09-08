@@ -214,12 +214,6 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
         </div>
         {/* Mobile: slideshow under title, no duplicate content */}
         <div className="lg:hidden space-y-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-sky-100 to-blue-100 border border-sky-200 justify-center">
-            <Droplets className="h-4 w-4 text-sky-600" />
-            <p className="text-sm font-medium text-sky-700">
-              Long Beach • Private & Small‑Group
-            </p>
-          </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
             Sailing Lessons, Catalina Trips,
             <span className="block bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
@@ -229,11 +223,11 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
           <div className="w-full max-w-2xl mx-auto">
             <HeroSlideshow />
           </div>
-          {/* 3 titles block - add spacing below for mobile */}
-          <div className="mt-6 mb-4">
-            <div className="font-bold text-lg text-sky-700 mb-2">Long Beach Private & Small‑Group</div>
-            <div className="font-bold text-lg text-sky-700 mb-2">Catalina Trips</div>
-            <div className="font-bold text-lg text-sky-700">Whale Watching & More</div>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-sky-100 to-blue-100 border border-sky-200 justify-center mt-6">
+            <Droplets className="h-4 w-4 text-sky-600" />
+            <p className="text-sm font-medium text-sky-700">
+              Long Beach • Private & Small‑Group
+            </p>
           </div>
           <p className="text-lg text-slate-600 max-w-md mx-auto leading-relaxed mb-4">
             Learn the ropes, set a course to Catalina, glide on paddle boards, or meet migrating giants. Crafted experiences from the Long Beach waterfront—designed for learning, adventure, and pure ocean joy.
