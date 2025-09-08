@@ -1,9 +1,18 @@
+import BoatSection from "./BoatSection";
+import WhyUs from "./WhyUs";
+import GalleryPlaceholder from "./GalleryPlaceholder";
+import Testimonial from "./Testimonial";
+import FAQ from "./FAQ";
+import Booking from "./Booking";
+import Footer from "./Footer";
+import CallNowFloating from "./CallNowFloating";
+// --- Polished Adventure Calendar Component ---
+// ...existing code...
 "use client";
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Calendar as CalendarWidget } from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+import AdventureCalendar from "./AdventureCalendar";
 import { 
   Phone, 
   Ship, 
@@ -302,6 +311,7 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
 }
 
 function Journey() {
+  import { Calendar as CalendarWidget } from "react-calendar";
   // Calendar state and events
   const [date, setDate] = React.useState(new Date());
   const events = {
@@ -700,9 +710,19 @@ function Offerings({ phone, formatPhone }: { phone: string; formatPhone: (phone:
           </div>
         </div>
       </div>
-    </section>
+      {/* Polished Adventure Calendar Section */}
+      <section className="py-20 px-6 md:px-12 bg-gradient-to-br from-sky-50 via-blue-50 to-cyan-50">
+        <div className="max-w-5xl mx-auto text-center mb-12">
+          <h2 className="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-blue-500 to-cyan-500">Upcoming Adventures</h2>
+          <p className="text-lg md:text-xl text-slate-600">
+            Pick a date to see lessons, trips, and special activities. Colorful dots mark event days!
+          </p>
+        </div>
+  <AdventureCalendar />
+      </section>
+  </section>
   );
-}
+// ...existing code...
 
 function BoatSection() {
   return (
@@ -759,8 +779,7 @@ function BoatSection() {
           </div>
         </div>
       </div>
-    </section>
-  );
+  </section>
 }
 
 function WhyUs() {
@@ -797,7 +816,9 @@ function WhyUs() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+// ...existing code...
+// ...existing code...
           {reasons.map((reason, index) => (
             <div key={reason.title}>
               <Card className="h-full p-6 text-center group hover:shadow-xl transition-all duration-300">
@@ -1335,4 +1356,5 @@ function CallNowFloating({ phone, formatPhone }: { phone: string; formatPhone: (
   );
 }
 
+}
 export default LandingPage;
