@@ -78,46 +78,99 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
   // Open menu instantly
   const openMenu = () => {
     setMobileMenuOpen(true);
-    setMenuAnimating(false);
-  };
-  // Close menu instantly
-  const closeMenu = () => {
-    setMobileMenuOpen(false);
-    setMenuAnimating(false);
-  };
-  // Close menu on background click
-  const handleMenuBgClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) closeMenu();
-  };
-  return (
-  <header className="fixed top-0 left-0 w-full z-50 backdrop-blur bg-gradient-to-r from-sky-300 via-blue-300 to-cyan-300 border-b border-sky-300/70">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
-        {/* Logo: desktop and mobile */}
-        <a href="#top" className="flex items-center gap-3 font-semibold hover:scale-105 transition-transform md:static fixed top-2 left-4 z-50">
-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-sky-600 text-white shadow-sm">
-            <Ship className="h-5 w-5" />
-          </span>
-          <span className="text-slate-900 hidden md:block">Sail Long Beach</span>
-          <span className="text-slate-900 md:hidden font-bold text-base">SLB</span>
-        </a>
-        <nav className="hidden md:flex items-center gap-6 text-sm text-slate-600">
-          <a href="#offerings" className="hover:text-sky-600 font-semibold transition-colors">Offerings</a>
-          <a href="#journey" className="hover:text-sky-600 font-semibold transition-colors">The Journey</a>
-          <a href="#boat" className="hover:text-sky-600 font-semibold transition-colors">The Boat</a>
-          <a href="#faq" className="hover:text-sky-600 font-semibold transition-colors">FAQ</a>
-          <a href="#booking" className="hover:text-sky-600 font-semibold transition-colors">Book</a>
-          <a href="#location" className="hover:text-sky-600 font-semibold transition-colors">Location</a>
-        </nav>
+    return (
+      <div>
+        {/* Desktop header: normal, mobile header: not sticky */}
+        <header className="w-full z-50 backdrop-blur bg-gradient-to-r from-sky-300 via-blue-300 to-cyan-300 border-b border-sky-300/70">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+            {/* Logo: desktop and mobile */}
+            <a href="#top" className="flex items-center gap-3 font-semibold hover:scale-105 transition-transform md:static fixed top-2 left-4 z-50">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-sky-600 text-white shadow-sm">
+                <Ship className="h-5 w-5" />
+              </span>
+              <span className="text-slate-900 hidden md:block">Sail Long Beach</span>
+              <span className="text-slate-900 md:hidden font-bold text-base">SLB</span>
+            </a>
+            <nav className="hidden md:flex items-center gap-6 text-sm text-slate-600">
+              <a href="#offerings" className="hover:text-sky-600 font-semibold transition-colors">Offerings</a>
+              <a href="#journey" className="hover:text-sky-600 font-semibold transition-colors">The Journey</a>
+              <a href="#boat" className="hover:text-sky-600 font-semibold transition-colors">The Boat</a>
+              <a href="#faq" className="hover:text-sky-600 font-semibold transition-colors">FAQ</a>
+              <a href="#booking" className="hover:text-sky-600 font-semibold transition-colors">Book</a>
+              <a href="#location" className="hover:text-sky-600 font-semibold transition-colors">Location</a>
+            </nav>
+            {/* Desktop Call Button: now inside flex row */}
+            <a 
+              href={`tel:${phone}`} 
+              className="hidden md:inline-flex items-center gap-2 rounded-xl bg-sky-600 px-4 py-2 text-white shadow-sm hover:bg-sky-700 transition-colors hover:scale-105"
+            >
+              <Phone className="h-4 w-4" /> {formatPhone(phone)}
+            </a>
+          </div>
+        </header>
+        {/* Mobile: sticky menu icon only */}
+        <button
+          className="md:hidden fixed top-2 right-4 h-9 w-9 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-md border border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200 z-[60]"
+          style={{ boxShadow: '0 2px 8px rgba(0, 180, 255, 0.10)' }}
+          onClick={() => mobileMenuOpen ? closeMenu() : openMenu()}
+          aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+        >
+          {mobileMenuOpen ? (
+            <span className="text-2xl text-sky-600">&times;</span>
+          ) : (
+            <svg className="h-5 w-5" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="9" width="20" height="2.5" rx="1.25" fill="url(#blue1)" />
+              <rect x="6" y="15" width="20" height="2.5" rx="1.25" fill="url(#blue2)" />
+              <rect x="6" y="21" width="20" height="2.5" rx="1.25" fill="url(#blue3)" />
+              <defs>
+                <linearGradient id="blue1" x1="6" y1="10" x2="26" y2="10" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#38bdf8" />
+                  <stop offset="1" stopColor="#0ea5e9" />
+                </linearGradient>
+                <linearGradient id="blue2" x1="6" y1="16" x2="26" y2="16" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#0ea5e9" />
+                  <stop offset="1" stopColor="#06b6d4" />
+                </linearGradient>
+                <linearGradient id="blue3" x1="6" y1="22" x2="26" y2="22" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#06b6d4" />
+                  <stop offset="1" stopColor="#38bdf8" />
+                </linearGradient>
+              </defs>
+            </svg>
+          )}
+        </button>
+        {/* Mobile menu popup */}
+        {mobileMenuOpen && (
+          <div
+            className="fixed inset-0 z-50 bg-gradient-to-br from-sky-100/80 via-white/90 to-blue-100/80 backdrop-blur-sm flex items-start justify-end"
+            onClick={handleMenuBgClick}
+            role="presentation"
+          >
+            <div
+              className="bg-white rounded-2xl shadow-xl mt-4 mr-4 p-4 w-64 flex flex-col gap-4 animate-fade-in border border-sky-200"
+              style={{ boxShadow: '0 4px 16px rgba(0, 180, 255, 0.10)' }}
+            >
+              <button className="self-end text-2xl text-sky-600 hover:text-sky-800 transition-colors" onClick={closeMenu} aria-label="Close menu">&times;</button>
+              <a href="#offerings" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>Offerings</a>
+              <a href="#journey" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>The Journey</a>
+              <a href="#boat" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>The Boat</a>
+              <a href="#faq" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>FAQ</a>
+              <a href="#booking" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>Book</a>
+              <a href="#location" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>Location</a>
+            </div>
+          </div>
+        )}
       </div>
-      {/* Mobile: sticky nav icon outside flex container */}
-      <button
-  className="md:hidden fixed top-2 right-4 h-9 w-9 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-md border border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200 z-[60]"
-        style={{ boxShadow: '0 2px 8px rgba(0, 180, 255, 0.10)' }}
-        onClick={openMenu}
-        aria-label="Open navigation menu"
-      >
-        {/* Water-themed nav icon */}
-        <svg className="h-5 w-5" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <stop offset="1" stopColor="#06b6d4" />
+              </linearGradient>
+              <linearGradient id="blue3" x1="6" y1="22" x2="26" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#06b6d4" />
+                <stop offset="1" stopColor="#38bdf8" />
+              </linearGradient>
+            </defs>
+          </svg>
+        )}
+      </button>
           <rect x="6" y="9" width="20" height="2.5" rx="1.25" fill="url(#blue1)" />
           <rect x="6" y="15" width="20" height="2.5" rx="1.25" fill="url(#blue2)" />
           <rect x="6" y="21" width="20" height="2.5" rx="1.25" fill="url(#blue3)" />
@@ -186,7 +239,7 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
         <div className="absolute bottom-0 right-0 w-full h-24 bg-gradient-to-t from-cyan-400/15 to-transparent rounded-t-full" style={{ transform: 'translateX(20px)' }} />
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 w-full">
+  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 w-full mt-16 lg:mt-0">
         {/* Desktop: hero content and slideshow side-by-side */}
         <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
@@ -224,75 +277,94 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
               </div>
               <div className="flex items-center gap-2 text-sm text-slate-600">
                 <Star className="h-4 w-4 text-yellow-500" />
-                <span>5.0 Rating</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-slate-600">
-                <Users className="h-4 w-4 text-blue-500" />
-                <span>500+ Happy Sailors</span>
-              </div>
-            </div>
-          </div>
-          {/* Slideshow for desktop */}
-          <div className="relative">
-            <HeroSlideshow />
-          </div>
-        </div>
-        {/* Mobile: slideshow under title, no duplicate content */}
-        <div className="lg:hidden space-y-4 text-center">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight mt-0 pt-0" style={{marginTop: '-2.5rem'}}>
-            Sailing Lessons, Catalina Trips,
-            <span className="block bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
-              Whale Watching & More
-            </span>
-          </h1>
-          <div className="w-full max-w-2xl mx-auto">
-            <HeroSlideshow />
-          </div>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-sky-100 to-blue-100 border border-sky-200 justify-center mt-6">
-            <Droplets className="h-4 w-4 text-sky-600" />
-            <p className="text-sm font-medium text-sky-700">
-              Long Beach • Private & Small‑Group
-            </p>
-          </div>
-          <p className="text-lg text-slate-600 max-w-md mx-auto leading-relaxed mb-4">
-            Learn the ropes, set a course to Catalina, glide on paddle boards, or meet migrating giants. Crafted experiences from the Long Beach waterfront—designed for learning, adventure, and pure ocean joy.
-          </p>
-          <div className="flex flex-col items-center gap-4 pt-4">
-            <Button size="lg" className="ripple-effect bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 text-white px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95">
-              <Sparkles className="h-5 w-5 mr-2" />
-              Book your spot
-            </Button>
-            <Button size="lg" variant="outline" className="ripple-effect border-2 border-sky-600 text-sky-600 hover:bg-sky-50 px-8 py-4 rounded-2xl hover:scale-105 active:scale-95 transition-all duration-300">
-              <Play className="h-5 w-5 mr-2" />
-              Watch Video
-            </Button>
-          </div>
-          {/* Trust indicators */}
-          <div className="flex flex-wrap items-center justify-center gap-6 pt-4">
-            <div className="flex items-center gap-2 text-sm text-slate-600">
-              <Shield className="h-4 w-4 text-green-500" />
-              <span>Licensed & Insured</span>
-            </div>
-            <div className="flex items-center gap-2 text-sm text-slate-600">
-              <Star className="h-4 w-4 text-yellow-500" />
-              <span>5.0 Rating</span>
-            </div>
-            <div className="flex items-center gap-2 text-sm text-slate-600">
-              <Users className="h-4 w-4 text-blue-500" />
-              <span>500+ Happy Sailors</span>
-            </div>
-          </div>
-          {/* Add spacing before scroll to explore for mobile */}
-          <div className="mt-8" />
-        </div>
-        {/* Enhanced scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2">
-          <span className="text-sm text-slate-500 font-medium">Scroll to explore</span>
-          <div className="w-6 h-10 border-2 border-sky-400 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-sky-400 rounded-full mt-2 float-animation" />
-          </div>
-        </div>
-      </div>
+                return (
+                  <>
+                    {/* SVG gradients for menu icon */}
+                    <svg width="0" height="0">
+                      <defs>
+                        <linearGradient id="blue1" x1="6" y1="10" x2="26" y2="10" gradientUnits="userSpaceOnUse">
+                          <stop stopColor="#38bdf8" />
+                          <stop offset="1" stopColor="#0ea5e9" />
+                        </linearGradient>
+                        <linearGradient id="blue2" x1="6" y1="16" x2="26" y2="16" gradientUnits="userSpaceOnUse">
+                          <stop stopColor="#0ea5e9" />
+                          <stop offset="1" stopColor="#06b6d4" />
+                        </linearGradient>
+                        <linearGradient id="blue3" x1="6" y1="22" x2="26" y2="22" gradientUnits="userSpaceOnUse">
+                          <stop stopColor="#06b6d4" />
+                          <stop offset="1" stopColor="#38bdf8" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                    <div>
+                      {/* Desktop header: normal, mobile header: not sticky */}
+                      <header className="w-full z-50 backdrop-blur bg-gradient-to-r from-sky-300 via-blue-300 to-cyan-300 border-b border-sky-300/70">
+                        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+                          {/* Logo: desktop and mobile */}
+                          <a href="#top" className="flex items-center gap-3 font-semibold hover:scale-105 transition-transform md:static fixed top-2 left-4 z-50">
+                            <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-sky-600 text-white shadow-sm">
+                              <Ship className="h-5 w-5" />
+                            </span>
+                            <span className="text-slate-900 hidden md:block">Sail Long Beach</span>
+                            <span className="text-slate-900 md:hidden font-bold text-base">SLB</span>
+                          </a>
+                          <nav className="hidden md:flex items-center gap-6 text-sm text-slate-600">
+                            <a href="#offerings" className="hover:text-sky-600 font-semibold transition-colors">Offerings</a>
+                            <a href="#journey" className="hover:text-sky-600 font-semibold transition-colors">The Journey</a>
+                            <a href="#boat" className="hover:text-sky-600 font-semibold transition-colors">The Boat</a>
+                            <a href="#faq" className="hover:text-sky-600 font-semibold transition-colors">FAQ</a>
+                            <a href="#booking" className="hover:text-sky-600 font-semibold transition-colors">Book</a>
+                            <a href="#location" className="hover:text-sky-600 font-semibold transition-colors">Location</a>
+                          </nav>
+                          {/* Desktop Call Button: now inside flex row */}
+                          <a 
+                            href={`tel:${phone}`} 
+                            className="hidden md:inline-flex items-center gap-2 rounded-xl bg-sky-600 px-4 py-2 text-white shadow-sm hover:bg-sky-700 transition-colors hover:scale-105"
+                          >
+                            <Phone className="h-4 w-4" /> {formatPhone(phone)}
+                          </a>
+                        </div>
+                      </header>
+                      {/* Mobile: sticky menu icon only */}
+                      <button
+                        className="md:hidden fixed top-2 right-4 h-9 w-9 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-md border border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200 z-[60]"
+                        style={{ boxShadow: '0 2px 8px rgba(0, 180, 255, 0.10)' }}
+                        onClick={() => mobileMenuOpen ? closeMenu() : openMenu()}
+                        aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                      >
+                        {mobileMenuOpen ? (
+                          <span className="text-2xl text-sky-600">&times;</span>
+                        ) : (
+                          <svg className="h-5 w-5" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="6" y="9" width="20" height="2.5" rx="1.25" fill="url(#blue1)" />
+                            <rect x="6" y="15" width="20" height="2.5" rx="1.25" fill="url(#blue2)" />
+                            <rect x="6" y="21" width="20" height="2.5" rx="1.25" fill="url(#blue3)" />
+                          </svg>
+                        )}
+                      </button>
+                      {/* Mobile menu popup */}
+                      {mobileMenuOpen && (
+                        <div
+                          className="fixed inset-0 z-50 bg-gradient-to-br from-sky-100/80 via-white/90 to-blue-100/80 backdrop-blur-sm flex items-start justify-end"
+                          onClick={handleMenuBgClick}
+                          role="presentation"
+                        >
+                          <div
+                            className="bg-white rounded-2xl shadow-xl mt-4 mr-4 p-4 w-64 flex flex-col gap-4 animate-fade-in border border-sky-200"
+                            style={{ boxShadow: '0 4px 16px rgba(0, 180, 255, 0.10)' }}
+                          >
+                            <button className="self-end text-2xl text-sky-600 hover:text-sky-800 transition-colors" onClick={closeMenu} aria-label="Close menu">&times;</button>
+                            <a href="#offerings" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>Offerings</a>
+                            <a href="#journey" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>The Journey</a>
+                            <a href="#boat" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>The Boat</a>
+                            <a href="#faq" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>FAQ</a>
+                            <a href="#booking" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>Book</a>
+                            <a href="#location" className="text-base font-semibold text-slate-700 hover:text-sky-600 transition-colors py-1 rounded-lg" onClick={closeMenu}>Location</a>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </>
     </section>
   );
 }
