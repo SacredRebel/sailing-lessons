@@ -40,6 +40,10 @@ import { images } from "@/lib/images";
 import LocationMap from "./LocationMap";
 
 const LandingPage = () => {
+  // Always scroll to top on mount (especially for mobile)
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, []);
   const phone = "424-339-9008";
 
   const formatPhone = (phone: string) => {
@@ -86,17 +90,15 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
     if (e.target === e.currentTarget) closeMenu();
   };
   return (
-    <header className="sticky top-0 z-40 backdrop-blur bg-white/90 border-b border-slate-200/60">
+    <header className="sticky top-0 z-50 backdrop-blur bg-white/90 border-b border-sky-200/60">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <a href="#top" className="flex items-center gap-3 font-semibold hover:scale-105 transition-transform">
+        {/* Desktop: logo and nav */}
+        <a href="#top" className="hidden md:flex items-center gap-3 font-semibold hover:scale-105 transition-transform">
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-sky-600 text-white shadow-sm">
             <Ship className="h-5 w-5" />
           </span>
-          <span className="text-slate-900 hidden sm:block">Sail Long Beach</span>
-          <span className="text-slate-900 sm:hidden">SLB</span>
+          <span className="text-slate-900">Sail Long Beach</span>
         </a>
-        
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6 text-sm text-slate-600">
           <a href="#offerings" className="hover:text-sky-600 font-semibold transition-colors">Offerings</a>
           <a href="#journey" className="hover:text-sky-600 font-semibold transition-colors">The Journey</a>
@@ -105,14 +107,34 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
           <a href="#booking" className="hover:text-sky-600 font-semibold transition-colors">Book</a>
           <a href="#location" className="hover:text-sky-600 font-semibold transition-colors">Location</a>
         </nav>
-        
-        {/* Mobile Menu Button */}
-  <button className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors" onClick={openMenu}>
-          <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+        {/* Mobile: only nav icon, styled */}
+        <button
+          className="md:hidden ml-auto h-12 w-12 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-lg border-2 border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200"
+          style={{ boxShadow: '0 4px 16px rgba(0, 180, 255, 0.10)' }}
+          onClick={openMenu}
+          aria-label="Open navigation menu"
+        >
+          {/* Water-themed nav icon */}
+          <svg className="h-7 w-7" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="9" width="20" height="2.5" rx="1.25" fill="url(#blue1)" />
+            <rect x="6" y="15" width="20" height="2.5" rx="1.25" fill="url(#blue2)" />
+            <rect x="6" y="21" width="20" height="2.5" rx="1.25" fill="url(#blue3)" />
+            <defs>
+              <linearGradient id="blue1" x1="6" y1="10" x2="26" y2="10" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#38bdf8" />
+                <stop offset="1" stopColor="#0ea5e9" />
+              </linearGradient>
+              <linearGradient id="blue2" x1="6" y1="16" x2="26" y2="16" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#0ea5e9" />
+                <stop offset="1" stopColor="#06b6d4" />
+              </linearGradient>
+              <linearGradient id="blue3" x1="6" y1="22" x2="26" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#06b6d4" />
+                <stop offset="1" stopColor="#38bdf8" />
+              </linearGradient>
+            </defs>
           </svg>
         </button>
-        {/* Mobile Menu Overlay with animation */}
         {mobileMenuOpen && (
           <div
             className="fixed inset-0 z-50 bg-gradient-to-br from-sky-100/80 via-white/90 to-blue-100/80 backdrop-blur-sm flex flex-col"
@@ -216,7 +238,7 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
         </div>
         {/* Mobile: slideshow under title, no duplicate content */}
         <div className="lg:hidden space-y-4 text-center">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight mt-0">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight mt-0 pt-0">
             Sailing Lessons, Catalina Trips,
             <span className="block bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
               Whale Watching & More
