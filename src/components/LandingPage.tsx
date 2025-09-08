@@ -107,8 +107,8 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
         </a>
         {/* Mobile: sticky menu icon only */}
         <button
-          className="md:hidden fixed top-2 right-4 h-9 w-9 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-md border border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200 z-[60]"
-          style={{ boxShadow: '0 2px 8px rgba(0, 180, 255, 0.10)' }}
+          className="md:hidden fixed top-2 right-4 h-9 w-9 flex items-center justify-center rounded-full bg-gradient-to-br from-sky-400 via-blue-500 to-cyan-400 shadow-md border border-sky-300 hover:scale-105 active:scale-95 transition-all duration-200 z-[100]"
+          style={{ boxShadow: '0 2px 8px rgba(0, 180, 255, 0.10)', position: 'sticky' }}
           onClick={() => mobileMenuOpen ? closeMenu() : openMenu()}
           aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
         >
@@ -139,7 +139,7 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
         {/* Mobile menu popup */}
         {mobileMenuOpen && (
           <div
-            className="fixed inset-0 z-50 bg-gradient-to-br from-sky-100/80 via-white/90 to-blue-100/80 backdrop-blur-sm flex items-start justify-end"
+            className="fixed inset-0 z-[200] bg-gradient-to-br from-sky-100/80 via-white/90 to-blue-100/80 backdrop-blur-sm flex items-start justify-end"
             onClick={handleMenuBgClick}
             role="presentation"
           >
@@ -226,23 +226,31 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
             {/* Remove desktop icons below slideshow */}
           </div>
         </div>
-        {/* Mobile: stacked hero content */}
+        {/* Mobile: restructured hero content */}
         <div className="lg:hidden flex flex-col items-center gap-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-sky-100 to-blue-100 border border-sky-200">
-            <Droplets className="h-4 w-4 text-sky-600" />
-            <p className="text-sm font-medium text-sky-700">
-              Long Beach • Private & Small‑Group
-            </p>
-          </div>
+          {/* Title */}
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight text-center">
             Sailing Lessons, Catalina Trips,
             <span className="block bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
               Whale Watching & More
             </span>
           </h1>
+          {/* Slideshow */}
+          <div className="w-full flex items-center justify-center">
+            <HeroSlideshow />
+          </div>
+          {/* Subtitle with icons and style */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-sky-100 to-blue-100 border border-sky-200">
+            <Droplets className="h-4 w-4 text-sky-600" />
+            <p className="text-sm font-medium text-sky-700">
+              Long Beach • Private & Small‑Group
+            </p>
+          </div>
+          {/* Text content */}
           <p className="text-base sm:text-lg text-slate-600 max-w-prose leading-relaxed text-center">
             Learn the ropes, set a course to Catalina, glide on paddle boards, or meet migrating giants. Crafted experiences from the Long Beach waterfront—designed for learning, adventure, and pure ocean joy.
           </p>
+          {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <Button size="lg" className="ripple-effect bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 text-white px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95">
               <Sparkles className="h-5 w-5 mr-2" />
@@ -254,7 +262,7 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
             </Button>
           </div>
           {/* Trust indicators */}
-          <div className="flex flex-wrap items-center gap-6 pt-4 justify-center">
+          <div className="flex flex-col items-center gap-4 pt-4 w-full">
             <div className="flex items-center gap-2 text-sm text-slate-600">
               <Shield className="h-4 w-4 text-green-500" />
               <span>Licensed & Insured</span>
@@ -262,6 +270,11 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
             <div className="flex items-center gap-2 text-sm text-slate-600">
               <Star className="h-4 w-4 text-yellow-500" />
               <span>5.0 Rating</span>
+            </div>
+            {/* Scroll to explore with animated icon (mobile only) */}
+            <div className="flex flex-col items-center gap-1 mt-2 animate-bounce">
+              <span className="text-sm text-sky-600 font-semibold">Scroll to explore</span>
+              <ChevronDown className="h-6 w-6 text-sky-600" />
             </div>
           </div>
         </div>
