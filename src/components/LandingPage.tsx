@@ -37,6 +37,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import OptimizedImage from "./OptimizedImage";
 import HeroSlideshow from "./HeroSlideshow";
 import { images } from "@/lib/images";
+import LocationMap from "./LocationMap";
 
 const LandingPage = () => {
   const phone = "424-339-9008";
@@ -58,6 +59,7 @@ const LandingPage = () => {
         <Testimonial />
         <FAQ />
         <Booking phone={phone} formatPhone={formatPhone} />
+        <LocationMap />
       </main>
       <Footer phone={phone} formatPhone={formatPhone} />
       <CallNowFloating phone={phone} formatPhone={formatPhone} />
@@ -69,18 +71,15 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [menuAnimating, setMenuAnimating] = React.useState(false);
 
-  // Open menu with animation
+  // Open menu instantly
   const openMenu = () => {
-    setMenuAnimating(true);
     setMobileMenuOpen(true);
+    setMenuAnimating(false);
   };
-  // Close menu with animation
+  // Close menu instantly
   const closeMenu = () => {
-    setMenuAnimating(true);
-    setTimeout(() => {
-      setMobileMenuOpen(false);
-      setMenuAnimating(false);
-    }, 300);
+    setMobileMenuOpen(false);
+    setMenuAnimating(false);
   };
   // Close menu on background click
   const handleMenuBgClick = (e: React.MouseEvent) => {
@@ -99,11 +98,12 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6 text-sm text-slate-600">
-          <a href="#offerings" className="hover:text-slate-900 transition-colors">Offerings</a>
-          <a href="#journey" className="hover:text-slate-900 transition-colors">The Journey</a>
-          <a href="#boat" className="hover:text-slate-900 transition-colors">The Boat</a>
-          <a href="#faq" className="hover:text-slate-900 transition-colors">FAQ</a>
-          <a href="#booking" className="hover:text-slate-900 transition-colors">Book</a>
+          <a href="#offerings" className="hover:text-sky-600 font-semibold transition-colors">Offerings</a>
+          <a href="#journey" className="hover:text-sky-600 font-semibold transition-colors">The Journey</a>
+          <a href="#boat" className="hover:text-sky-600 font-semibold transition-colors">The Boat</a>
+          <a href="#faq" className="hover:text-sky-600 font-semibold transition-colors">FAQ</a>
+          <a href="#booking" className="hover:text-sky-600 font-semibold transition-colors">Book</a>
+          <a href="#location" className="hover:text-sky-600 font-semibold transition-colors">Location</a>
         </nav>
         
         {/* Mobile Menu Button */}
@@ -113,21 +113,23 @@ function Header({ phone, formatPhone }: { phone: string; formatPhone: (phone: st
           </svg>
         </button>
         {/* Mobile Menu Overlay with animation */}
-        {(mobileMenuOpen || menuAnimating) && (
+        {mobileMenuOpen && (
           <div
-            className={`fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex flex-col transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-100' : 'opacity-0'}`}
+            className="fixed inset-0 z-50 bg-gradient-to-br from-sky-100/80 via-white/90 to-blue-100/80 backdrop-blur-sm flex flex-col"
             onClick={handleMenuBgClick}
             role="presentation"
           >
             <div
-              className={`bg-white rounded-b-2xl shadow-xl mx-2 mt-2 p-6 flex flex-col gap-6 transition-transform duration-300 ${mobileMenuOpen ? 'translate-y-0' : '-translate-y-20'} animate-slide-down`}
+              className="bg-white rounded-b-3xl shadow-2xl mx-2 mt-2 p-8 flex flex-col gap-8 animate-fade-in"
+              style={{ boxShadow: '0 8px 32px rgba(0, 180, 255, 0.12)' }}
             >
-              <button className="self-end text-2xl text-slate-600 hover:text-slate-900" onClick={closeMenu} aria-label="Close menu">&times;</button>
-              <a href="#offerings" className="text-lg font-semibold text-slate-700 hover:text-sky-600 transition-colors" onClick={closeMenu}>Offerings</a>
-              <a href="#journey" className="text-lg font-semibold text-slate-700 hover:text-sky-600 transition-colors" onClick={closeMenu}>The Journey</a>
-              <a href="#boat" className="text-lg font-semibold text-slate-700 hover:text-sky-600 transition-colors" onClick={closeMenu}>The Boat</a>
-              <a href="#faq" className="text-lg font-semibold text-slate-700 hover:text-sky-600 transition-colors" onClick={closeMenu}>FAQ</a>
-              <a href="#booking" className="text-lg font-semibold text-slate-700 hover:text-sky-600 transition-colors" onClick={closeMenu}>Book</a>
+              <button className="self-end text-3xl text-sky-600 hover:text-sky-800 transition-colors" onClick={closeMenu} aria-label="Close menu">&times;</button>
+              <a href="#offerings" className="text-xl font-bold text-slate-700 hover:text-sky-600 transition-colors py-2 rounded-xl" onClick={closeMenu}>Offerings</a>
+              <a href="#journey" className="text-xl font-bold text-slate-700 hover:text-sky-600 transition-colors py-2 rounded-xl" onClick={closeMenu}>The Journey</a>
+              <a href="#boat" className="text-xl font-bold text-slate-700 hover:text-sky-600 transition-colors py-2 rounded-xl" onClick={closeMenu}>The Boat</a>
+              <a href="#faq" className="text-xl font-bold text-slate-700 hover:text-sky-600 transition-colors py-2 rounded-xl" onClick={closeMenu}>FAQ</a>
+              <a href="#booking" className="text-xl font-bold text-slate-700 hover:text-sky-600 transition-colors py-2 rounded-xl" onClick={closeMenu}>Book</a>
+              <a href="#location" className="text-xl font-bold text-slate-700 hover:text-sky-600 transition-colors py-2 rounded-xl" onClick={closeMenu}>Location</a>
             </div>
           </div>
         )}
@@ -214,7 +216,7 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
         </div>
         {/* Mobile: slideshow under title, no duplicate content */}
         <div className="lg:hidden space-y-4 text-center">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight mt-4">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight mt-0">
             Sailing Lessons, Catalina Trips,
             <span className="block bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">
               Whale Watching & More
