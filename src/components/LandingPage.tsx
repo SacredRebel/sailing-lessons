@@ -13,6 +13,7 @@ import CallNowFloating from "./CallNowFloating";
 import React from "react";
 import { motion } from "framer-motion";
 import AdventureCalendar from "./AdventureCalendar";
+import { Calendar as CalendarWidget } from "react-calendar";
 import { 
   Phone, 
   Ship, 
@@ -311,7 +312,6 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
 }
 
 function Journey() {
-  import { Calendar as CalendarWidget } from "react-calendar";
   // Calendar state and events
   const [date, setDate] = React.useState(new Date());
   const events = {
