@@ -679,15 +679,15 @@ function BoatSection() {
           </div>
           {/* Add spacing above image for mobile */}
           <div className="relative mt-16 lg:mt-0">
-            <OptimizedImage
-              src={images.sailing.boat.src}
-              alt={images.sailing.boat.alt}
-              title={images.sailing.boat.title}
-              className="w-full h-96 rounded-3xl shadow-xl"
-              width={600}
-              height={400}
-              quality={85}
-            />
+            <div className="w-full h-96 flex items-center justify-center rounded-3xl border-2 shadow-xl bg-gradient-to-br from-sky-100 via-blue-50 to-cyan-100 border-sky-300 p-2">
+              <OptimizedImage
+                src={images.sailing.boat.src}
+                alt={images.sailing.boat.alt}
+                title={images.sailing.boat.title}
+                className="object-cover w-full h-full rounded-2xl"
+                quality={85}
+              />
+            </div>
             <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg">
               <div className="text-sm font-semibold text-slate-800">40ft Sailboat</div>
               <div className="text-xs text-slate-600">Two Cabins • Safety Equipped</div>
@@ -921,9 +921,17 @@ function GalleryPlaceholder() {
           {galleryImages.map((item, index) => (
             <div 
               key={index} 
-              className={`group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 ${
-                item.featured ? 'md:col-span-2 md:row-span-2' : ''
-              } aspect-square flex items-center justify-center`}
+              className={
+                `group relative overflow-hidden rounded-3xl border-2 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 ` +
+                [
+                  'bg-gradient-to-br from-sky-100 via-blue-50 to-cyan-100 border-sky-300',
+                  'bg-gradient-to-br from-blue-100 via-sky-50 to-cyan-100 border-blue-300',
+                  'bg-gradient-to-br from-cyan-100 via-sky-50 to-blue-100 border-cyan-300',
+                  'bg-gradient-to-br from-sky-100 via-cyan-50 to-blue-100 border-sky-400'
+                ][index % 4] +
+                (item.featured ? ' md:col-span-2 md:row-span-2' : '') +
+                ' aspect-square flex items-center justify-center'
+              }
               onClick={() => openModal(index)}
               role="button"
               tabIndex={0}
