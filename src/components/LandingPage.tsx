@@ -39,6 +39,7 @@ import OptimizedImage from "./OptimizedImage";
 import HeroSlideshow from "./HeroSlideshow";
 import { images } from "@/lib/images";
 import LocationMap from "./LocationMap";
+// import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const LandingPage = () => {
   // Always scroll to top on mount (especially for mobile)
@@ -65,7 +66,8 @@ const LandingPage = () => {
         <Testimonial />
         <FAQ />
         <Booking phone={phone} formatPhone={formatPhone} />
-        <LocationMap />
+  <LocationMap />
+  {/* <SpeedInsights /> */}
       </main>
       <Footer phone={phone} formatPhone={formatPhone} />
       <CallNowFloating phone={phone} formatPhone={formatPhone} />
@@ -623,6 +625,10 @@ function Offerings({ phone, formatPhone }: { phone: string; formatPhone: (phone:
           ))}
         </div>
 
+        {/* Calendar Widget below adventure cards */}
+        <div className="mt-16">
+          <CalendarWidget />
+        </div>
         {/* Call to action */}
         <div className="text-center mt-16">
           <div className="inline-flex flex-col sm:flex-row items-center gap-4 p-8 bg-gradient-to-r from-sky-50 to-blue-50 rounded-3xl border-2 border-sky-200">
@@ -737,13 +743,21 @@ function WhyUs() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {reasons.map((reason, index) => (
             <div key={reason.title}>
-              <Card className="h-full p-6 text-center group hover:shadow-xl transition-all duration-300">
-                <div className="inline-flex p-4 rounded-2xl bg-sky-100 text-sky-600 mb-4 group-hover:scale-110 transition-transform duration-300">
+              <Card className={
+                `h-full p-6 text-center group hover:shadow-2xl transition-all duration-500 rounded-3xl border-2 shadow-xl ` +
+                [
+                  'from-sky-100 via-blue-50 to-cyan-100 border-sky-300',
+                  'from-blue-100 via-sky-50 to-cyan-100 border-blue-300',
+                  'from-cyan-100 via-sky-50 to-blue-100 border-cyan-300',
+                  'from-sky-100 via-cyan-50 to-blue-100 border-sky-400'
+                ][index % 4].split(' ').map(cls => cls.startsWith('border-') ? cls : `bg-gradient-to-br ${cls}`).join(' ')
+              }>
+                <div className="inline-flex p-4 rounded-2xl bg-white/40 text-sky-600 mb-4 group-hover:scale-110 transition-transform duration-300">
                   {reason.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-slate-900 mb-2">{reason.title}</h3>
                 <p className="text-slate-600">{reason.description}</p>
-            </Card>
+              </Card>
             </div>
           ))}
         </div>
@@ -1069,10 +1083,20 @@ function FAQ() {
         <div className="space-y-4">
           {faqs.map((faq, index) => (
             <div key={index}>
-              <Card className="p-6">
+              <Card className={
+                `p-6 rounded-3xl border-2 shadow-xl ` +
+                [
+                  'from-sky-100 via-blue-50 to-cyan-100 border-sky-300',
+                  'from-blue-100 via-sky-50 to-cyan-100 border-blue-300',
+                  'from-cyan-100 via-sky-50 to-blue-100 border-cyan-300',
+                  'from-sky-100 via-cyan-50 to-blue-100 border-sky-400',
+                  'from-blue-100 via-cyan-50 to-sky-100 border-blue-400',
+                  'from-cyan-100 via-blue-50 to-sky-100 border-cyan-400'
+                ][index % 6].split(' ').map(cls => cls.startsWith('border-') ? cls : `bg-gradient-to-br ${cls}`).join(' ')
+              }>
                 <h3 className="text-lg font-semibold text-slate-900 mb-2">{faq.question}</h3>
                 <p className="text-slate-600">{faq.answer}</p>
-            </Card>
+              </Card>
             </div>
           ))}
           </div>
@@ -1109,7 +1133,9 @@ function Booking({ phone, formatPhone }: { phone: string; formatPhone: (phone: s
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Left Side - Booking Form */}
           <div className="order-2 lg:order-1">
-            <Card className="p-8">
+            <Card className={
+              `p-8 rounded-3xl border-2 shadow-xl bg-gradient-to-br from-sky-100 via-blue-50 to-cyan-100 border-sky-300`
+            }>
               <h3 className="text-2xl font-semibold text-slate-900 mb-6 text-center">Book Your Adventure</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-4">

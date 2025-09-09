@@ -75,7 +75,8 @@ export default function CalendarWidget({ isBookingSection = false }: { isBooking
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`bg-white rounded-3xl shadow-xl p-6 ${isBookingSection ? 'h-fit' : ''}`}
+      className={`bg-gradient-to-br from-sky-100 via-blue-50 to-cyan-100 border-2 border-sky-300 rounded-3xl shadow-xl p-6 ${isBookingSection ? 'h-fit' : ''}`}
+      style={{ boxShadow: '0 4px 24px rgba(56, 189, 248, 0.10)' }}
     >
       <div className="text-center mb-6">
         <h3 className="text-3xl font-bold text-slate-900 mb-2">
