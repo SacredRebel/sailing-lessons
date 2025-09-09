@@ -235,9 +235,9 @@ function Hero({ phone, formatPhone }: { phone: string; formatPhone: (phone: stri
               <span>Local Expertise</span>
             </div>
           </div>
-          <div className="mt-2 flex flex-col items-center">
-            <span className="text-sm text-sky-600 font-semibold">Scroll to explore</span>
-            <ChevronDown className="h-8 w-8 text-sky-600 animate-bounce" />
+          <div className="mt-6 flex flex-col items-center">
+            <span className="text-sm text-sky-600 font-semibold mb-2">Scroll to explore</span>
+            <ChevronDown className="h-8 w-8 text-sky-600 animate-bounce" style={{ marginTop: '8px' }} />
           </div>
         </div>
         {/* Mobile: restructured hero content */}
