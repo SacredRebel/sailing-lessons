@@ -1,0 +1,47 @@
+{
+  "projectName": "Sailing Lessons Web App",
+  "description": "A modern web application for sailing lessons, water activities, and location-based experiences. Built with React, TypeScript, Vite, and Tailwind CSS.",
+  "techStack": [
+    "React",
+    "TypeScript",
+    "Vite",
+    "Tailwind CSS",
+    "ESLint",
+    "PostCSS"
+  ],
+  "mainFeatures": [
+    "Landing page with hero slideshow",
+    "Location map integration",
+    "Optimized image handling",
+    "Reusable UI components (accordion, alert, button, card, carousel, etc.)",
+    "Custom hooks (e.g., use-mobile, use-toast)",
+    "Toast notifications",
+    "404 Not Found page",
+    "Image assets for sailing, kayaking, paddleboarding, whale watching, and scuba diving"
+  ],
+  "keyFiles": [
+    "src/App.tsx",
+    "src/pages/Index.tsx",
+    "src/pages/NotFound.tsx",
+    "src/components/HeroSlideshow.tsx",
+    "src/components/LandingPage.tsx",
+    "src/components/LocationMap.tsx",
+    "src/components/OptimizedImage.tsx",
+    "src/components/ui/*",
+    "src/hooks/use-mobile.tsx",
+    "src/hooks/use-toast.ts",
+    "src/lib/images.ts",
+    "src/lib/utils.ts",
+    "src/utils/toast.ts"
+  ],
+  "publicAssets": "Images and icons for water activities, located in public/images/",
+  "configFiles": [
+    "vite.config.ts",
+    "tailwind.config.ts",
+    "tsconfig.json",
+    "eslint.config.js",
+    "postcss.config.js",
+    "package.json"
+  ],
+  "deployment": "Configured for Vercel deployment (vercel.json)"
+}
